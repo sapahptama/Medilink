@@ -1,0 +1,46 @@
+/* 🎨 Contenedor general de la pantalla de bienvenida */
+.splash-container {
+  display: flex;                /* Colocamos todo con flexbox */
+  flex-direction: column;       /* Elementos en columna */
+  justify-content: center;      /* Centrado vertical */
+  align-items: center;          /* Centrado horizontal */
+  height: 100vh;                /* Ocupa toda la altura de la pantalla */
+  background: linear-gradient(135deg, #0d6e6e, #4fd1c5); /* Degradado con colores del logo */
+  color: white;                 /* Texto blanco */
+  text-align: center;           /* Texto centrado */
+  font-family: Arial, sans-serif; /* Fuente clara y simple */
+  animation: fadeIn 1.5s ease-in-out; /* Animación de entrada */
+}
+
+/* ✨ Animación para que aparezca de manera suave */
+@keyframes fadeIn {
+  from { opacity: 0; }  /* Empieza transparente */
+  to { opacity: 1; }    /* Termina visible */
+}
+
+/* 🖼️ Logo */
+.splash-logo {
+  width: 120px;         /* Tamaño del logo */
+  height: auto;         /* Mantiene proporción */
+  margin-bottom: 20px;  /* Espacio debajo del logo */
+  animation: zoomIn 1.5s ease-in-out; /* Animación de zoom */
+}
+
+/* 🔍 Animación para el logo: entra haciendo zoom */
+@keyframes zoomIn {
+  from { transform: scale(0.5); opacity: 0; } /* Más pequeño y oculto */
+  to { transform: scale(1); opacity: 1; }     /* A tamaño normal y visible */
+}
+
+/* 🔵 Nombre MediLink */
+.splash-title {
+  font-size: 2.2rem;    /* Tamaño de letra grande */
+  font-weight: bold;    /* Negrita */
+  margin-bottom: 10px;  /* Espacio con el lema */
+}
+
+/* 🟣 Lema */
+.splash-tagline {
+  font-size: 1.2rem;    /* Tamaño de letra mediano */
+  font-style: italic;   /* Cursiva */
+}

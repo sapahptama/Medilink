@@ -1,0 +1,112 @@
+/* login.css */
+
+/* Fondo y fuente base */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: linear-gradient(to right, #e6f4f3, #d0f0ef);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Caja del login */
+.login-container {
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(0, 128, 128, 0.2);
+  padding: 40px 30px;
+  width: 100%;
+  max-width: 400px;
+  box-sizing: border-box;
+  text-align: center;
+  backdrop-filter: blur(10px); /* hace que se vea moderno y translúcido */
+}
+
+/* Logo con borde suave */
+.logo img {
+  width: 90px;
+  margin-bottom: 20px;
+  border-radius: 50%;
+  padding: 8px;
+  background: rgba(58, 175, 169, 0.1);
+  box-shadow: 0 4px 12px rgba(58, 175, 169, 0.3);
+}
+
+/* Título principal */
+h2 {
+  color: #3aafa9;
+  font-size: 24px;
+  margin-bottom: 25px;
+}
+
+/* Etiquetas del formulario */
+.login-form label {
+  display: block;
+  text-align: left;
+  margin-bottom: 5px;
+  font-weight: 600;
+  color: #3aafa9;
+}
+
+/* Campos de entrada */
+.login-form input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+/* Enlace para olvidar contraseña */
+.olvide-password {
+  display: block;
+  text-align: right;
+  font-size: 13px;
+  color: #3aafa9;
+  margin-top: -15px;
+  margin-bottom: 20px;
+  text-decoration: none;
+}
+
+.olvide-password:hover {
+  text-decoration: underline;
+}
+
+/* Botón */
+.login-form button {
+  background-color: #3aafa9;
+  color: white;
+  padding: 12px;
+  width: 100%;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.login-form button:hover {
+  background-color: #2b7a78;
+  transform: scale(1.02);
+}
+
+/* Enlace de registro */
+.registro-link {
+  margin-top: 20px;
+  font-size: 14px;
+  color: #555;
+}
+
+.registro-link a {
+  color: #3aafa9;
+  text-decoration: none;
+}
+
+.registro-link a:hover {
+  text-decoration: underline;
+}

@@ -1,0 +1,50 @@
+.citas-container {
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(0, 128, 128, 0.2);
+  padding: 30px;
+  max-width: 800px;
+  margin: 40px auto;
+  backdrop-filter: blur(10px);
+}
+
+.citas-container h2 {
+  text-align: center;
+  color: #3aafa9;
+  margin-bottom: 30px;
+}
+
+.citas-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.cita-card {
+  background: #ffffff;
+  border-left: 6px solid #3aafa9;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(58, 175, 169, 0.15);
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.cita-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(58, 175, 169, 0.3);
+}
+
+.cita-card h3 {
+  margin-top: 0;
+  color: #2b7a78;
+}
+
+.cita-card p {
+  margin: 5px 0;
+  color: #555;
+  font-size: 15px;
+}
+
+.cita-card strong {
+  color: #3aafa9;
+}
