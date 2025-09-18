@@ -1,0 +1,55 @@
+
+.principal-medico-container {
+  max-width: 900px;
+  margin: 30px auto;
+  font-family: Arial, sans-serif;
+}
+
+.listado-medicos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.card-medico {
+  background-color: #f1f1f1;
+  padding: 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  flex: 1 1 250px;
+  transition: transform 0.2s;
+}
+
+.card-medico:hover {
+  transform: scale(1.03);
+  background-color: #e2e6ea;
+}
+
+.detalle-medico-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.cerrar-btn {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.cerrar-btn:hover {
+  background-color: #a71d2a;
+}

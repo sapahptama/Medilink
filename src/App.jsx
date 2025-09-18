@@ -1,19 +1,40 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import RecuperarContrasena from './components/RecuperarContrasena/RecuperarContrasena.jsx';
-import Citas from "./components/citas/citas.jsx";
-import Login from "./components/login/login.jsx";
-import Inicio from "./components/Inicio/Inicio.jsx";  
-import Splash from "./components/Splash/Splash.jsx";
+import RecuperarContrasena from "./pages/RecuperarContrasena/RecuperarContrasena.jsx";
+import Citas from "./pages/citas/citas.jsx";
+import Login from "./pages/login/login.jsx";
+import Inicio from "./pages/Inicio/Inicio.jsx";  
+import Splash from "./pages/Splash/Splash.jsx";
+import PaginaFormulario from "./pages/FormularioPaciente/PaginaFormulario.jsx";
+import AvailableDoctors from "./pages/MedicosDisponibles/Medicos_disponibles.jsx";
+import CitasList from "./pages/CitasUsuarios/citasUsuarios.jsx";
+import SelectedDoctor from "./pages/SeleccionMedico/SeleccionMedico.jsx";
+import FormularioRegistroMedico from "./pages/FormularioRegistroMedico/formularioRegistroMedico.jsx";
+import VistaMedico from "./pages/VistaDetalladaMedico/vistamedico.jsx";
+import VistaPrincipalMedico from "./pages/VistaPrincipalMedico/vistaprincipalmedico.jsx";
+import HistorialMedico from "./pages/HistorialMedico/historialmedico.jsx";
 
 function App() {
   return (
     <Router>
       <Routes>
+        {/* Maria José */}
         <Route path="/" element={<Splash />} />
         <Route path="/citas" element={<Citas />} />
         <Route path="/Recuperar" element={<RecuperarContrasena />} />
         <Route path="/inicio" element={<Inicio />} />
-        <Route path="/login" element={<inicio />} />
+        <Route path="/login" element={<Login />} />
+        {/* Yenifer */}
+        <Route path="/formulario-paciente" element={<PaginaFormulario />} />
+        <Route path="/medicos-disponibles" element={<AvailableDoctors />} />
+        <Route path="/citas-del-usuario" element={<CitasList />} />
+        <Route path="/seleccionar-medico" element={<SelectedDoctor />} />
+        <Route path="/citamedico" element={<SelectedDoctor />} />
+        {/* Fin Yenifer */}
+        {/* Yidis  */}
+        <Route path="/registro-medico" element={<FormularioRegistroMedico />} />
+        <Route path="/vistamedico" element={<VistaMedico />} />
+        <Route path="/vistaprincipalmedico" element={<VistaPrincipalMedico />} />
+        <Route path="/historialmedico" element={<HistorialMedico />} />
       </Routes>
     </Router>
   );

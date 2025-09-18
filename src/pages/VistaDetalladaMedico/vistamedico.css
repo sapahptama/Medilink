@@ -1,0 +1,65 @@
+.vista-medico-container {
+  max-width: 700px;
+  margin: 30px auto;
+  padding: 25px;
+  background-color: #f8f9fa;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
+  position: relative;
+}
+
+.header-medico {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.btn-acciones {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.btn-acciones:hover {
+  background-color: #0056b3;
+}
+
+.dropdown-menu {
+  list-style: none;
+  padding: 0;
+  margin: 5px 0 0 0;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  position: absolute;
+  z-index: 10;
+}
+
+.dropdown-item {
+  padding: 10px 15px;
+  width: 150px;
+  text-align: left;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.dropdown-item:hover {
+  background-color: #f0f0f0;
+}
+
+.detalle-medico p {
+  margin: 10px 0;
+  font-size: 16px;
+  color: #495057;
+}
+
+.detalle-medico p strong {
+  color: #212529;
+}

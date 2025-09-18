@@ -1,0 +1,57 @@
+.historial-container {
+  display: flex;
+  gap: 30px;
+  padding: 40px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.listado-pacientes {
+  flex: 1;
+}
+
+.listado-pacientes h1 {
+  margin-bottom: 20px;
+  color: #007bff;
+}
+
+.card-paciente {
+  background-color: #fff;
+  padding: 15px 20px;
+  margin-bottom: 15px;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card-paciente:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+.detalle-paciente {
+  flex: 2;
+  background-color: #f9f9f9;
+  padding: 20px 30px;
+  border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+}
+
+.detalle-historial-container h2 {
+  margin-top: 0;
+  color: #333;
+}
+
+.detalle-historial-container h3 {
+  margin-top: 20px;
+  color: #007bff;
+}
+
+.detalle-historial-container ul {
+  padding-left: 20px;
+}
+
+.detalle-historial-container li {
+  margin-bottom: 10px;
+  line-height: 1.5;
+}

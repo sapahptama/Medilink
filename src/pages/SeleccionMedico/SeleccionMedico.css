@@ -1,0 +1,85 @@
+:root {
+  --mint: #7AD9C1;       
+  --mint-light: #A6E2D5; 
+  --blue-dark: #4A6B74;  
+  --white: #FFFFFF;
+  --gray-light: #F5F7F7; 
+}
+
+.selected-doctor-container {
+  padding: 20px;
+  background-color: var(--gray-light);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.doctor-info-card {
+  background-color: var(--white);
+  border: 1px solid var(--mint);
+  border-radius: 12px;
+  padding: 20px;
+  max-width: 500px;
+  width: 100%;
+  box-shadow: 0px 4px 12px rgba(0,0,0,0.08);
+  margin-bottom: 20px;
+}
+
+.doctor-info-card h2 {
+  margin-bottom: 10px;
+  color: var(--blue-dark);
+  font-size: 1.8rem;
+}
+
+.doctor-info-card p {
+  margin: 8px 0;
+  color: var(--blue-dark);
+  font-size: 1rem;
+}
+
+.action-section {
+  text-align: center;
+}
+
+.note {
+  color: var(--blue-dark);
+  margin-bottom: 12px;
+}
+
+.btn-next {
+  padding: 10px 20px;
+  background-color: var(--mint);
+  color: var(--blue-dark);
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.btn-next:hover {
+  background-color: var(--mint-light);
+}
+
+@media (max-width: 768px) {
+  .doctor-info-card {
+    width: 95%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .selected-doctor-container {
+    flex-direction: row;
+    justify-content: center;
+    gap: 30px;
+  }
+
+  .action-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+
