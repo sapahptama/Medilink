@@ -8,6 +8,11 @@ import PaginaFormulario from "./pages/FormularioPaciente/PaginaFormulario.jsx";
 import AvailableDoctors from "./pages/MedicosDisponibles/Medicos_disponibles.jsx";
 import CitasList from "./pages/CitasUsuarios/citasUsuarios.jsx";
 import SelectedDoctor from "./pages/SeleccionMedico/SeleccionMedico.jsx";
+import FormularioRegistroMedico from "./pages/FormularioRegistroMedico/formularioRegistroMedico.jsx";
+import VistaMedico from "./pages/VistaDetalladaMedico/vistamedico.jsx";
+import VistaPrincipalMedico from "./pages/VistaPrincipalMedico/vistaprincipalmedico.jsx";
+import HistorialMedico from "./pages/HistorialMedico/historialmedico.jsx";
+
 function App() {
   return (
     <Router>
@@ -25,6 +30,11 @@ function App() {
         <Route path="/seleccionar-medico" element={<SelectedDoctor />} />
         <Route path="/citamedico" element={<SelectedDoctor />} />
         {/* Fin Yenifer */}
+        {/* Yidis  */}
+        <Route path="/registro-medico" element={<FormularioRegistroMedico />} />
+        <Route path="/vistamedico" element={<VistaMedico />} />
+        <Route path="/vistaprincipalmedico" element={<VistaPrincipalMedico />} />
+        <Route path="/historialmedico" element={<HistorialMedico />} />
       </Routes>
     </Router>
   );
