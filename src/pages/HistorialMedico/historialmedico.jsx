@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import "./historialmedico.css";
+import { IoIosArrowRoundBack } from "react-icons/io";
+
 
 export default function Historialmedico() {
   const [pacientes] = useState([
@@ -31,25 +33,31 @@ export default function Historialmedico() {
   return (
     <div className="historial-container">
       {/* Lista de pacientes */}
-      <div className="listado-pacientes">
-        <h1>Pacientes</h1>
-        {pacientes.map((paciente) => (
-          <div
-            key={paciente.id}
-            className={`card-paciente ${pacienteSeleccionado?.id === paciente.id ? "activo" : ""}`}
-            onClick={() => setPacienteSeleccionado(paciente)}
-          >
-            <p><strong>{paciente.nombre} {paciente.apellidos}</strong></p>
-            <p>Edad: {paciente.edad}</p>
-            <p>{paciente.telefono}</p>
-          </div>
-        ))}
-      </div>
+      {!pacienteSeleccionado && (
+        <div className="listado-pacientes">
+          <h1>Pacientes</h1>
+          {pacientes.map((paciente) => (
+            <div
+              key={paciente.id}
+              className={`card-paciente ${pacienteSeleccionado?.id === paciente.id ? "activo" : ""}`}
+              onClick={() => setPacienteSeleccionado(paciente)}
+            >
+              <p><strong>{paciente.nombre} {paciente.apellidos}</strong></p>
+              <p>Edad: {paciente.edad}</p>
+              <p>{paciente.telefono}</p>
+            </div>
+          ))}
+        </div>)}
 
       {/* Detalle del historial */}
       <div className="detalle-paciente">
         {pacienteSeleccionado ? (
+          <>
+          <div className="d-inline-flex p-2">
+              <IoIosArrowRoundBack className="text-start" onClick={() => setPacienteSeleccionado(null)}></IoIosArrowRoundBack>
+            </div>
           <div className="detalle-historial-container">
+            
             <h2>{pacienteSeleccionado.nombre} {pacienteSeleccionado.apellidos}</h2>
             <p><strong>Edad:</strong> {pacienteSeleccionado.edad}</p>
             <p><strong>Teléfono:</strong> {pacienteSeleccionado.telefono}</p>
@@ -66,6 +74,7 @@ export default function Historialmedico() {
               )}
             </ul>
           </div>
+          </>
         ) : (
           <p className="mensaje-seleccion">Seleccione un paciente para ver su historial.</p>
         )}
