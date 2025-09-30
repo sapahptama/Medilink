@@ -1,87 +1,32 @@
-:root {
-  --mint: #7AD9C1;
-  --mint-light: #A6E2D5;
-  --blue-dark: #4A6B74;
-  --white: #FFFFFF;
-}
-
-body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background-color: var(--mint-light);
-}
-
-.user-appointments-container {
+/* Citasusuarios.css */
+.citas-usuario {
   max-width: 900px;
-  margin: 0 auto;
+  margin: 30px auto;
   padding: 20px;
+  font-family: "Inter", Arial, sans-serif;
 }
 
-.user-appointments-container h2 {
-  color: var(--blue-dark);
+.citas-usuario h2 {
+  color: #0d6e6e;
   text-align: center;
   margin-bottom: 20px;
 }
 
-.appointment-table {
-  width: 100%;
-  border-collapse: collapse;
-  background-color: var(--white);
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  overflow: hidden;
+.cita-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 15px;
+  margin-bottom: 15px;
+  box-shadow: 0 4px 12px rgba(13, 110, 110, 0.08);
 }
 
-.appointment-table th,
-.appointment-table td {
-  padding: 14px 12px;
-  text-align: left;
-  font-size: 14px;
-  color: var(--blue-dark);
+.cita-card h3 {
+  margin: 0;
+  color: #0d6e6e;
 }
 
-.appointment-table thead {
-  background-color: var(--mint);
-  color: var(--blue-dark);
-}
-
-.appointment-table tbody tr {
-  border-bottom: 1px solid var(--mint-light);
-}
-
-.appointment-table tbody tr:hover {
-  background-color: var(--mint-light);
-}
-
-@media screen and (max-width: 768px) {
-  .appointment-table thead {
-    display: none;
-  }
-
-  .appointment-table, .appointment-table tbody, .appointment-table tr, .appointment-table td {
-    display: block;
-    width: 100%;
-  }
-
-  .appointment-table tr {
-    margin-bottom: 20px;
-    background-color: var(--white);
-    border-radius: 10px;
-    padding: 10px;
-  }
-
-  .appointment-table td {
-    text-align: right;
-    padding-left: 50%;
-    position: relative;
-  }
-
-  .appointment-table td::before {
-    content: attr(data-label);
-    position: absolute;
-    left: 12px;
-    font-weight: bold;
-    color: var(--blue-dark);
-  }
+.cita-card p {
+  margin: 5px 0;
+  font-size: 0.9rem;
+  color: #333;
 }

@@ -1,0 +1,20 @@
+/* Perfil.css */
+.perfil-container {
+  max-width: 600px;
+  margin: 30px auto;
+  padding: 25px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(13, 110, 110, 0.15);
+  text-align: center;
+}
+
+.perfil-container img {
+  width: 100px;
+  border-radius: 50%;
+  margin-bottom: 15px;
+}
+
+.perfil-container h2 {
+  color: #0d6e6e;
+}

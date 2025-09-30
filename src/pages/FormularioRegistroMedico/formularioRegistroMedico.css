@@ -1,158 +1,28 @@
-
-.formulario-container {
-  max-width: 700px;
-  margin: 40px auto;
-  padding: 30px;
-  border-radius: 16px;
-  box-shadow: 0 6px 18px var(--sombra);
-  border: 1px solid var(--color-borde);
-  animation: aparecer 0.6s ease;
-}
-
-@keyframes aparecer {
-  from { opacity: 0; transform: translateY(-10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.titulo-form {
-  text-align: center;
-  font-size: var(--font-title);
-  margin-bottom: 30px;
-  color: var(--color-principal);
-  font-weight: 700;
-}
-
+/* Formularioregistromedico.css */
 .formulario-medico {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 25px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(13, 110, 110, 0.15);
+}
+
+.formulario-medico h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #0d6e6e;
 }
 
 .formulario-medico label {
-  display: flex;
-  flex-direction: column;
   font-weight: 600;
-  font-size: var(--font-label);
-  color: var(--color-texto);
+  color: #0d6e6e;
 }
 
-.formulario-medico input,
-.formulario-medico select {
-  margin-top: 6px;
-  padding: 12px 14px;
-  border: 1px solid var(--color-borde);
-  border-radius: 8px;
-  font-size: var(--font-base);
-  background: #fff;
-  transition: all 0.3s ease;
+.formulario-medico input {
   width: 100%;
-  box-sizing: border-box;
+  padding: 10px;
+  border: 1px solid #c2e9e9;
+  border-radius: 8px;
+  margin-bottom: 15px;
 }
-
-.formulario-medico input:focus,
-.formulario-medico select:focus {
-  outline: none;
-  border-color: var(--color-secundario);
-  box-shadow: 0 0 0 3px rgba(123, 211, 181, 0.3);
-}
-
-/* 🔥 Grupo centrado */
-.grupo {
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* Centra horizontalmente */
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.btn-enviar {
-  margin: 20px auto; /* Centrado automático */
-  padding: 14px;
-  background: linear-gradient(90deg, var(--color-principal), var(--color-secundario));
-  color: #fff;
-  border: none;
-  border-radius: 10px;
-  font-size: var(--font-button);
-  font-weight: 700;
-  cursor: pointer;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  box-shadow: 0 4px 8px var(--sombra);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.btn-enviar:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 12px var(--sombra);
-}
-
-.btn-enviar:active {
-  transform: translateY(0);
-  box-shadow: 0 3px 6px var(--sombra);
-}
-
-.btn-archivo {
-  background: linear-gradient(90deg, var(--color-principal), var(--color-secundario));
-  color:  var(--primary-color);
-  border: none;
-  padding: 12px 22px;
-  border-radius: 10px;
-  cursor: pointer;
-  font-size: var(--font-button);
-  font-weight: 700;
-  margin-top: 8px;
-  margin-bottom: 8px;
-  transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
-  box-shadow: 0 3px 10px var(--sombra);
-  letter-spacing: 0.5px;
-  outline: none;
-  border-bottom: 3px solid var(--color-secundario);
-  
-  /* 🔥 Centrado automático */
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.btn-archivo:hover, .btn-archivo:focus {
-  background: linear-gradient(90deg, var(--color-secundario), var(--color-principal));
-  transform: translateY(-2px) scale(1.05);
-  box-shadow: 0 6px 16px var(--sombra);
-}
-
-.nombre-archivo {
-  font-size: 1em;
-  color: var(--color-principal);
-  font-weight: 600;
-  margin-left: 6px;
-  vertical-align: middle;
-  word-break: break-all;
-  display: inline-block;
-  max-width: 60%;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-@media (max-width: 600px) {
-  .formulario-container {
-    margin: 30px 15px;
-    padding: 30px;
-    border-radius: 12px;
-  }
-  .btn-archivo {
-    width: 100%;
-    margin-right: 0;
-    margin-bottom: 10px;
-    padding: 12px 0;
-    font-size: 1em;
-  }
-  .nombre-archivo {
-    display: block;
-    max-width: 100%;
-    margin-left: 0;
-    margin-top: 4px;
-  }
-}
-
-
