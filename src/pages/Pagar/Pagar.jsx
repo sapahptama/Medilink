@@ -1,84 +1,101 @@
 import React, { useState } from "react";
-import "./pagar.css";
+import { useNavigate } from "react-router-dom";
+import { FaArrowLeft, FaCreditCard, FaUniversity, FaMoneyBill, FaMobileAlt } from "react-icons/fa";
+import "./Pagar.css";
 
-const Pagar = () => {
-  const [citas, setCitas] = useState([
-    { 
-      id: 1, 
-      medico: "Dra. Ana Torres", 
-      especialidad: "Cardiología",
-      fecha: "2024-03-20", 
-      hora: "15:30", 
-      estado: "pendiente", 
-      valor: 85000,
-      tipo: "Consulta Especializada"
-    },
-    { 
-      id: 2, 
-      medico: "Dr. Luis Gómez", 
-      especialidad: "Pediatría",
-      fecha: "2024-03-25", 
-      hora: "09:00", 
-      estado: "pendiente", 
-      valor: 65000,
-      tipo: "Control"
+export default function Pagar() {
+  const navigate = useNavigate();
+
+  const [metodo, setMetodo] = useState("");
+  const [numeroTarjeta, setNumeroTarjeta] = useState("");
+  const [fechaVenc, setFechaVenc] = useState("");
+  const [numeroNequi, setNumeroNequi] = useState("");
+
+  const handleConfirmar = () => {
+    if (!metodo) {
+      alert("Por favor selecciona un método de pago.");
+      return;
     }
-  ]);
-  
-  const [seleccionada, setSeleccionada] = useState(null);
-
-  const pagarCita = id => {
-    setCitas(citas.map(c => c.id === id ? { ...c, estado: "pagada" } : c));
-    setSeleccionada(null);
+    alert(`Pago confirmado con ${metodo}`);
+    
   };
 
-  const citasPendientes = citas.filter(c => c.estado === "pendiente");
+  // Función de volver 
+  const handleBack = () => {
+    navigate("/inicio"); // <-- va a inicio
+    // Si prefieres "volver a la página anterior" usa: navigate(-1)
+  };
 
   return (
     <div className="pagar-container">
-      <h2>Pagar Citas Pendientes</h2>
-      
-      {citasPendientes.length === 0 ? (
-        <div style={{textAlign: 'center', color: '#7f8c8d', fontSize: '1.1rem'}}>
-          No tienes citas pendientes de pago
-        </div>
-      ) : (
-        <>
-          <ul className="pagar-lista">
-            {citasPendientes.map(cita => (
-              <li key={cita.id} className={seleccionada === cita.id ? "seleccionada" : ""}>
-                <div className="pagar-info">
-                  <h3>{cita.medico}</h3>
-                  <div className="pagar-detalles">
-                    {cita.especialidad} • {cita.tipo}
-                  </div>
-                  <div className="pagar-detalles">
-                    {cita.fecha} a las {cita.hora}
-                  </div>
-                </div>
-                <div className="pagar-valor">${cita.valor.toLocaleString()}</div>
-                <button 
-                  className="boton-seleccionar"
-                  onClick={() => setSeleccionada(seleccionada === cita.id ? null : cita.id)}
-                >
-                  {seleccionada === cita.id ? 'Deseleccionar' : 'Seleccionar'}
-                </button>
-              </li>
-            ))}
-          </ul>
-          
-          {seleccionada && (
-            <button 
-              className="boton-pagar" 
-              onClick={() => pagarCita(seleccionada)}
-            >
-              Pagar Cita Seleccionada
-            </button>
-          )}
-        </>
-      )}
+      <button className="back-button" onClick={handleBack} aria-label="Volver a inicio">
+        <FaArrowLeft size={18} /> <span>Inicio</span>
+      </button>
+
+      <h2>Confirmar Pago</h2>
+
+      {/* Resumen */}
+      <div className="resumen">
+        <h3>Resumen de tu cita</h3>
+        <p><strong>Doctor:</strong> Dra. Lopez</p>
+        <p><strong>Especialidad:</strong> Pediatria</p>
+        <p><strong>Fecha:</strong> 10 de Octubre 2025</p>
+        <p><strong>Hora:</strong> 10:30 AM</p>
+        <p><strong>Precio:</strong> $80.000</p>
+      </div>
+
+      {/* Métodos de pago */}
+      <div className="metodos">
+        <h3>Elige tu método de pago</h3>
+
+        <button className="metodo-btn" onClick={() => setMetodo("Tarjeta")}>
+          <FaCreditCard size={18} /> Tarjeta de Crédito/Débito
+        </button>
+
+        {metodo === "Tarjeta" && (
+          <div className="form-pago">
+            <input
+              type="text"
+              placeholder="Número de tarjeta"
+              value={numeroTarjeta}
+              onChange={(e) => setNumeroTarjeta(e.target.value)}
+            />
+            <input
+              type="text"
+              placeholder="Fecha de vencimiento (MM/AA)"
+              value={fechaVenc}
+              onChange={(e) => setFechaVenc(e.target.value)}
+            />
+          </div>
+        )}
+
+        <button className="metodo-btn" onClick={() => setMetodo("PSE")}>
+          <FaUniversity size={18} /> PSE - Transferencia
+        </button>
+
+        <button className="metodo-btn" onClick={() => setMetodo("Nequi")}>
+          <FaMobileAlt size={18} /> Nequi
+        </button>
+
+        {metodo === "Nequi" && (
+          <div className="form-pago">
+            <input
+              type="text"
+              placeholder="Número de celular Nequi"
+              value={numeroNequi}
+              onChange={(e) => setNumeroNequi(e.target.value)}
+            />
+          </div>
+        )}
+
+        <button className="metodo-btn" onClick={() => setMetodo("Efectivo")}>
+          <FaMoneyBill size={18} /> Pago en la clínica
+        </button>
+      </div>
+
+      <button className="confirmar-btn" onClick={handleConfirmar}>
+        Confirmar Pago
+      </button>
     </div>
   );
-};
-
-export default Pagar;
+}

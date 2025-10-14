@@ -4,11 +4,18 @@
 html, body {
   margin: 0;
   padding: 0;
-  background: linear-gradient(to right, #e6f4f3, #d0f0ef);
+  background: linear-gradient(to right, #41918a, #063532);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 /* Caja del login */

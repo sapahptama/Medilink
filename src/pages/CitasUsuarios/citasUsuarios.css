@@ -1,32 +1,70 @@
-/* Citasusuarios.css */
-.citas-usuario {
-  max-width: 900px;
-  margin: 30px auto;
+.citasusuarios-container {
+  min-height: 100vh;
   padding: 20px;
-  font-family: "Inter", Arial, sans-serif;
+  background: #DDF4F1; /* Fondo suave */
+  font-family: Inter, Arial, sans-serif;
+  color: #2E6E71; /* Texto principal con el color base */
+  box-sizing: border-box;
 }
 
-.citas-usuario h2 {
-  color: #0d6e6e;
-  text-align: center;
+/* Flecha de volver */
+.back-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #2E6E71; /* Azul oscuro verdoso */
+  cursor: pointer;
+  font-weight: 600;
   margin-bottom: 20px;
 }
 
+h2 {
+  color: #2E6E71;
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+/* Contenedor de tarjetas */
+.citas-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Tarjeta de cita */
 .cita-card {
   background: #fff;
   border-radius: 12px;
-  padding: 15px;
-  margin-bottom: 15px;
-  box-shadow: 0 4px 12px rgba(13, 110, 110, 0.08);
+  padding: 18px 20px;
+  box-shadow: 0 4px 12px rgba(46, 110, 113, 0.15);
+  border: 2px solid #B8F2F3; /* Azul clarito */
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
-.cita-card h3 {
-  margin: 0;
-  color: #0d6e6e;
+/* Fila de info dentro de la tarjeta */
+.cita-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 15px;
+  color: #2E6E71;
 }
 
-.cita-card p {
-  margin: 5px 0;
-  font-size: 0.9rem;
-  color: #333;
+/* Íconos */
+.cita-row .icon {
+  color: #2E6E71;
+  font-size: 18px;
+}
+
+/* Mensaje si no hay citas */
+.sin-citas {
+  text-align: center;
+  color: #2E6E71;
+  background: #B8F2F3;
+  padding: 12px;
+  border-radius: 8px;
 }

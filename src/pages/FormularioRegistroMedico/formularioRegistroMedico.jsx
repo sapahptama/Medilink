@@ -2,9 +2,6 @@ import React, { useState, useRef } from "react";
 import "./formularioRegistroMedico.css";
 
 
-
-
-
 function VistaMedico({ medico, onVolver }) {
   return (
     <div className="vista-medico">
