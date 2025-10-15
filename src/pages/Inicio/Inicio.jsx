@@ -1,98 +1,383 @@
-import React from "react";
-import { FaSearch, FaBell, FaUserMd, FaClinicMedical } from "react-icons/fa";
-import "./Inicio.css";
+import React, { useState } from 'react';
+import { Search, Bell, Calendar, User, Activity, FileText, Clock, MapPin, Phone, Mail, ChevronRight, Heart, Pill, Stethoscope, ClipboardList, MessageCircle, Home } from 'lucide-react';
+import './Inicio.css';
 
 function Inicio() {
-  // 🔎 Función ejemplo para el buscador
-  const handleBuscar = () => {
-    alert("Función de búsqueda (se conecta después)");
+  const [searchTerm, setSearchTerm] = useState('');
+  const [activeTab, setActiveTab] = useState('inicio');
+  
+  // 🔗 FUNCIONES DE NAVEGACIÓN - Agrega aquí tus redirecciones
+  const navigateTo = {
+    buscar: () => {
+      console.log('Navegar a búsqueda avanzada');
+      // Ejemplo: window.location.href = '/buscar';
+      // O con React Router: navigate('/buscar');
+    },
+    notificaciones: () => {
+      console.log('Navegar a notificaciones');
+      setActiveTab('notificaciones');
+      // navigate('/notificaciones');
+    },
+    perfil: () => {
+      console.log('Navegar a perfil completo');
+      setActiveTab('perfil');
+      // navigate('/perfil');
+    },
+    mensajes: () => {
+      console.log('Navegar a mensajes');
+      setActiveTab('mensajes');
+      // navigate('/mensajes');
+    },
+    inicio: () => {
+      console.log('Navegar a inicio');
+      setActiveTab('inicio');
+      // navigate('/inicio');
+    },
+    agendarCita: () => {
+      console.log('Navegar a agendar cita');
+      // navigate('/agendar-cita');
+    },
+    misCitas: () => {
+      console.log('Navegar a mis citas');
+      // navigate('/mis-citas');
+    },
+    historialMedico: () => {
+      console.log('Navegar a historial médico');
+      // navigate('/historial-medico');
+    },
+    recetas: () => {
+      console.log('Navegar a recetas');
+      // navigate('/recetas');
+    },
+    resultados: () => {
+      console.log('Navegar a resultados de laboratorio');
+      // navigate('/resultados-lab');
+    },
+    clinica: (clinicaId) => {
+      console.log(`Navegar a clínica: ${clinicaId}`);
+      // navigate(`/clinica/${clinicaId}`);
+    },
+    doctor: (doctorId) => {
+      console.log(`Navegar a doctor: ${doctorId}`);
+      // navigate(`/doctor/${doctorId}`);
+    },
+    verDetalleCita: (citaId) => {
+      console.log(`Ver detalle de cita: ${citaId}`);
+      // navigate(`/cita/${citaId}`);
+    }
   };
 
   return (
-    <div className="inicio-container">
-      {/* HEADER FIJO */}
-      <header className="inicio-header">
-        <h1 className="inicio-logo">MediLink</h1>
-        <div className="inicio-icons">
-          <button onClick={handleBuscar} title="Buscar">
-            <FaSearch />
-          </button>
-          <button onClick={() => alert("Ir a notificaciones")} title="Notificaciones">
-            <FaBell />
-          </button>
+    <div className="inicio-perfil-container">
+      {/* HEADER MODERNO */}
+      <header className="inicio-perfil-header">
+        <div className="header-content">
+          <div className="header-left">
+            <div className="logo-icon">
+              <Heart className="icon-heart" />
+            </div>
+            <h1 className="logo-text">MediLink</h1>
+          </div>
+          
+          <div className="header-right">
+            <button 
+              onClick={navigateTo.notificaciones}
+              className="header-icon-btn"
+              aria-label="Notificaciones"
+            >
+              <Bell className="header-icon" />
+              <span className="notification-badge"></span>
+            </button>
+            
+            <button 
+              onClick={navigateTo.perfil}
+              className="header-profile-btn"
+              aria-label="Perfil"
+            >
+              <div className="profile-avatar">
+                <User className="profile-icon" />
+              </div>
+            </button>
+          </div>
         </div>
       </header>
 
-      {/* CONTENIDO (con margen superior para que no quede escondido) */}
-      <div className="inicio-contenido">
-        {/* Barra de búsqueda */}
-        <div className="search-bar">
-          <input type="text" placeholder="Buscar clínicas o doctores..." />
-          <button onClick={handleBuscar}>Buscar</button>
-        </div>
-
-        {/* Filtros */}
-        <div className="filters">
-          <select>
-            <option value="">Especialidad</option>
-            <option value="general">Medicina General</option>
-            <option value="cardiologia">Cardiología</option>
-            <option value="odontologia">Odontología</option>
-          </select>
-          <select>
-            <option value="">Ciudad</option>
-            <option value="medellin">Medellín</option>
-            <option value="bogota">Bogotá</option>
-            <option value="cali">Cali</option>
-          </select>
-        </div>
-
-        {/* Accesos rápidos */}
-        <div className="accesos-rapidos">
-          <div className="acceso">
-            <FaClinicMedical size={30} />
-            <p>Clínica Norte</p>
-          </div>
-          <div className="acceso">
-            <FaClinicMedical size={30} />
-            <p>Clínica Central</p>
-          </div>
-          <div className="acceso">
-            <FaUserMd size={30} />
-            <p>Dra. López</p>
-          </div>
-          <div className="acceso">
-            <FaUserMd size={30} />
-            <p>Dr. Martínez</p>
+      <div className="main-content">
+        {/* SALUDO Y BARRA DE BÚSQUEDA */}
+        <div className="welcome-section">
+          <h2 className="welcome-title">¡Hola, María! 👋</h2>
+          <p className="welcome-subtitle">¿Cómo podemos ayudarte hoy?</p>
+          
+          <div className="search-container">
+            <Search className="search-icon" />
+            <input
+              type="text"
+              placeholder="Buscar clínicas, doctores, especialidades..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="search-input"
+            />
+            <button 
+              onClick={navigateTo.buscar}
+              className="search-button"
+            >
+              Buscar
+            </button>
           </div>
         </div>
 
-        {/* Próxima cita */}
-        <div className="card">
-          <h3>Próxima cita</h3>
-          <p>Lun 10:00 a.m. — Dra. López (Clínica Norte)</p>
-          <button className="btn-detalles">Ver detalles</button>
+        {/* ACCIONES RÁPIDAS */}
+        <div className="quick-actions">
+          <button 
+            onClick={navigateTo.agendarCita}
+            className="action-card"
+          >
+            <div className="action-icon teal">
+              <Calendar className="icon" />
+            </div>
+            <h3 className="action-title">Agendar Cita</h3>
+            <p className="action-subtitle">Nueva consulta</p>
+          </button>
+
+          <button 
+            onClick={navigateTo.misCitas}
+            className="action-card"
+          >
+            <div className="action-icon blue">
+              <ClipboardList className="icon" />
+            </div>
+            <h3 className="action-title">Mis Citas</h3>
+            <p className="action-subtitle">Ver programadas</p>
+          </button>
+
+          <button 
+            onClick={navigateTo.historialMedico}
+            className="action-card"
+          >
+            <div className="action-icon purple">
+              <FileText className="icon" />
+            </div>
+            <h3 className="action-title">Historial</h3>
+            <p className="action-subtitle">Médico</p>
+          </button>
+
+          <button 
+            onClick={navigateTo.recetas}
+            className="action-card"
+          >
+            <div className="action-icon amber">
+              <Pill className="icon" />
+            </div>
+            <h3 className="action-title">Recetas</h3>
+            <p className="action-subtitle">Medicamentos</p>
+          </button>
         </div>
 
-        {/* Chequeo */}
-        <div className="card">
-          <h3>Chequeo anual recomendado</h3>
-          <p>¡No olvides programar tu chequeo!</p>
-        </div>
+        <div className="content-grid">
+          {/* COLUMNA IZQUIERDA */}
+          <div className="left-column">
+            {/* PRÓXIMA CITA */}
+            <div className="next-appointment-card">
+              <div className="appointment-header">
+                <div className="appointment-info">
+                  <p className="appointment-label">Próxima cita</p>
+                  <h3 className="appointment-time">Lunes, 10:00 AM</h3>
+                  <p className="appointment-doctor">
+                    <Stethoscope className="inline-icon" />
+                    Dra. Ana López - Cardiología
+                  </p>
+                  <p className="appointment-location">
+                    <MapPin className="inline-icon" />
+                    Clínica Norte - Consultorio 302
+                  </p>
+                </div>
+                <div className="appointment-icon-wrapper">
+                  <Calendar className="appointment-icon" />
+                </div>
+              </div>
+              <div className="appointment-actions">
+                <button 
+                  onClick={() => navigateTo.verDetalleCita('cita-123')}
+                  className="btn-primary"
+                >
+                  Ver detalles
+                </button>
+                <button className="btn-secondary">
+                  Re-agendar
+                </button>
+              </div>
+            </div>
 
-        {/* Vacunación */}
-        <div className="card">
-          <h3>Vacunación</h3>
-          <p>Vacúnate en tu clínica más cercana</p>
-        </div>
+            {/* CLÍNICAS Y DOCTORES FAVORITOS */}
+            <div className="favorites-card">
+              <h3 className="card-title">
+                <Heart className="title-icon red" />
+                Favoritos
+              </h3>
+              
+              <div className="favorites-list">
+                <button 
+                  onClick={() => navigateTo.clinica('clinica-norte')}
+                  className="favorite-item"
+                >
+                  <div className="favorite-icon teal">
+                    <Activity className="icon" />
+                  </div>
+                  <div className="favorite-info">
+                    <h4 className="favorite-name">Clínica Norte</h4>
+                    <p className="favorite-description">Medicina General • Especialidades</p>
+                  </div>
+                  <ChevronRight className="chevron-icon" />
+                </button>
 
-        {/* Nueva clínica */}
-        <div className="card">
-          <h3>Nueva clínica disponible</h3>
-          <p>Clínica Vida — Medicina General</p>
-          <button className="btn-agendar">Agendar</button>
+                <button 
+                  onClick={() => navigateTo.doctor('dr-martinez')}
+                  className="favorite-item"
+                >
+                  <div className="favorite-avatar blue">
+                    <User className="icon" />
+                  </div>
+                  <div className="favorite-info">
+                    <h4 className="favorite-name">Dr. Carlos Martínez</h4>
+                    <p className="favorite-description">Medicina General</p>
+                  </div>
+                  <ChevronRight className="chevron-icon" />
+                </button>
+
+                <button 
+                  onClick={() => navigateTo.doctor('dra-lopez')}
+                  className="favorite-item"
+                >
+                  <div className="favorite-avatar purple">
+                    <User className="icon" />
+                  </div>
+                  <div className="favorite-info">
+                    <h4 className="favorite-name">Dra. Ana López</h4>
+                    <p className="favorite-description">Cardiología</p>
+                  </div>
+                  <ChevronRight className="chevron-icon" />
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {/* COLUMNA DERECHA */}
+          <div className="right-column">
+            {/* RECORDATORIOS */}
+            <div className="reminders-card">
+              <h3 className="card-title">
+                <Clock className="title-icon amber" />
+                Recordatorios
+              </h3>
+              
+              <div className="reminders-list">
+                <div className="reminder-item amber">
+                  <p className="reminder-title">Chequeo anual</p>
+                  <p className="reminder-text">Programa tu examen general</p>
+                </div>
+                
+                <div className="reminder-item blue">
+                  <p className="reminder-title">Vacunación</p>
+                  <p className="reminder-text">Refuerzo disponible</p>
+                </div>
+                
+                <div className="reminder-item green">
+                  <p className="reminder-title">Resultados listos</p>
+                  <p className="reminder-text">2 análisis disponibles</p>
+                  <button 
+                    onClick={navigateTo.resultados}
+                    className="reminder-link"
+                  >
+                    Ver resultados →
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* CONTACTO RÁPIDO */}
+            <div className="contact-card">
+              <h3 className="card-title">Contacto</h3>
+              
+              <div className="contact-list">
+                <a 
+                  href="tel:+573001234567" 
+                  className="contact-item"
+                >
+                  <div className="contact-icon teal">
+                    <Phone className="icon" />
+                  </div>
+                  <div>
+                    <p className="contact-label">Llamar</p>
+                    <p className="contact-value">Línea de atención</p>
+                  </div>
+                </a>
+                
+                <a 
+                  href="mailto:soporte@medilink.com" 
+                  className="contact-item"
+                >
+                  <div className="contact-icon blue">
+                    <Mail className="icon" />
+                  </div>
+                  <div>
+                    <p className="contact-label">Email</p>
+                    <p className="contact-value">Enviar consulta</p>
+                  </div>
+                </a>
+              </div>
+            </div>
+
+            {/* NUEVA CLÍNICA */}
+            <div className="promo-card">
+              <h3 className="promo-title">🎉 Nueva Clínica</h3>
+              <p className="promo-text">Clínica Vida ahora disponible cerca de ti</p>
+              <button 
+                onClick={() => navigateTo.clinica('clinica-vida')}
+                className="promo-button"
+              >
+                Conocer más
+              </button>
+            </div>
+          </div>
         </div>
       </div>
+
+      {/* BARRA DE NAVEGACIÓN INFERIOR */}
+      <nav className="bottom-navigation">
+        <button 
+          onClick={navigateTo.inicio}
+          className={`nav-item ${activeTab === 'inicio' ? 'active' : ''}`}
+        >
+          <Home className="nav-icon" />
+          <span className="nav-label">Inicio</span>
+        </button>
+
+        <button 
+          onClick={navigateTo.mensajes}
+          className={`nav-item ${activeTab === 'mensajes' ? 'active' : ''}`}
+        >
+          <MessageCircle className="nav-icon" />
+          <span className="nav-label">Mensajes</span>
+          <span className="nav-badge">3</span>
+        </button>
+
+        <button 
+          onClick={navigateTo.notificaciones}
+          className={`nav-item ${activeTab === 'notificaciones' ? 'active' : ''}`}
+        >
+          <Bell className="nav-icon" />
+          <span className="nav-label">Notificaciones</span>
+          <span className="nav-badge">5</span>
+        </button>
+
+        <button 
+          onClick={navigateTo.perfil}
+          className={`nav-item ${activeTab === 'perfil' ? 'active' : ''}`}
+        >
+          <User className="nav-icon" />
+          <span className="nav-label">Perfil</span>
+        </button>
+      </nav>
     </div>
   );
 }

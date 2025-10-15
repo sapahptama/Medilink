@@ -10,6 +10,7 @@
   text-align: center;           /* Texto centrado */
   font-family: Arial, sans-serif; /* Fuente clara y simple */
   animation: fadeIn 1.5s ease-in-out; /* Animación de entrada */
+  width: 100%;
 }
 
 /* ✨ Animación para que aparezca de manera suave */
