@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import RecuperarContrasena from "./pages/RecuperarContrasena/RecuperarContrasena.jsx";
-import CitasDelMedico from "./pages/Citas/citasdelmedico.jsx";
+import CitasDelMedico from "./pages/Citas/Citasdelmedico.jsx";
 import Login from "./pages/login/login.jsx";
 import Inicio from "./pages/Inicio/Inicio.jsx";
 import Splash from "./pages/Splash/Splash.jsx";
