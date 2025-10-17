@@ -10,23 +10,193 @@
   color: #0d6e6e;
   text-align: center;
   margin-bottom: 20px;
+  font-size: 2rem;
+  font-weight: 600;
 }
 
-.cita-card {
-  background: #fff;
-  border-radius: 12px;
-  padding: 15px;
-  margin-bottom: 15px;
-  box-shadow: 0 4px 12px rgba(13, 110, 110, 0.08);
+.contenedor {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
 }
 
-.cita-card h3 {
-  margin: 0;
+.titulo {
   color: #0d6e6e;
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 2.2rem;
+  font-weight: 700;
 }
 
-.cita-card p {
-  margin: 5px 0;
-  font-size: 0.9rem;
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 25px;
+  padding: 20px 0;
+}
+
+.card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 25px;
+  box-shadow: 0 6px 20px rgba(13, 110, 110, 0.15);
+  transition: all 0.3s ease;
+  border: 1px solid rgba(13, 110, 110, 0.1);
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 25px rgba(13, 110, 110, 0.2);
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #0d6e6e, #14a8a8);
+}
+
+.imagen {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #0d6e6e;
+  margin: 0 auto 15px;
+  display: block;
+}
+
+.nombre {
+  color: #0d6e6e;
+  text-align: center;
+  margin: 0 0 8px 0;
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.especialidad {
+  color: #14a8a8;
+  text-align: center;
+  margin: 0 0 15px 0;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.card p {
+  margin: 8px 0;
+  font-size: 0.95rem;
   color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.card p:not(.estado)::before {
+  content: '';
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.card p:nth-of-type(1)::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%230d6e6e'%3E%3Cpath d='M8 14q.425 0 .713-.288T9 13q0-.425-.288-.713T8 12q-.425 0-.713.288T7 13q0 .425.288.713T8 14Zm4 0q.425 0 .713-.288T13 13q0-.425-.288-.713T12 12q-.425 0-.713.288T11 13q0 .425.288.713T12 14Zm4 0q.425 0 .713-.288T17 13q0-.425-.288-.713T16 12q-.425 0-.713.288T15 13q0 .425.288.713T16 14ZM5 22q-.825 0-1.413-.588T3 20V6q0-.825.588-1.413T5 4h1V2h2v2h8V2h2v2h1q.825 0 1.413.588T21 6v14q0 .825-.588 1.413T19 22H5Zm0-2h14V10H5v10Z'/%3E%3C/svg%3E");
+}
+
+.card p:nth-of-type(2)::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%230d6e6e'%3E%3Cpath d='M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2Zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8Zm.5-13H11v6l5.2 3.2.8-1.3-4.5-2.7V7Z'/%3E%3C/svg%3E");
+}
+
+.estado {
+  margin-top: 15px !important;
+  padding: 8px 12px;
+  border-radius: 20px;
+  font-weight: 600;
+  text-align: center;
+  justify-content: center !important;
+  font-size: 0.9rem;
+}
+
+.verde {
+  background-color: #e8f5e8;
+  color: #2e7d32;
+}
+
+.naranja {
+  background-color: #fff3e0;
+  color: #f57c00;
+}
+
+.rojo {
+  background-color: #ffebee;
+  color: #c62828;
+}
+
+.boton-chat {
+  background: linear-gradient(135deg, #0d6e6e, #14a8a8);
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 25px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 15px;
+  width: 100%;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.boton-chat:hover {
+  background: linear-gradient(135deg, #0b5c5c, #119494);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(13, 110, 110, 0.3);
+}
+
+.boton-chat:active {
+  transform: translateY(0);
+}
+
+.boton-chat::before {
+  content: '💬';
+  font-size: 1.1rem;
+}
+
+/* Responsive */
+/* En la sección Responsive, modifica esto: */
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .contenedor {
+    padding: 0px;
+  }
+  
+  .titulo {
+    font-size: 1.8rem;
+  }
+  
+  .card {
+    padding: 10px;
+  }
+  
+  /* AGREGAR ESTO ↓ */
+  .card p:not(.estado) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
 }

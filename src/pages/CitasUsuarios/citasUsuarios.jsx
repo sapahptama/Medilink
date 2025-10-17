@@ -32,6 +32,12 @@ export default function CitasAgendadas() {
     },
   ];
 
+  const handleChatClick = (medico) => {
+    // Aquí puedes integrar tu función existente para abrir el chat
+    console.log(`Iniciar chat con ${medico}`);
+    // tuFuncionDeChat(medico);
+  };
+
   return (
     <div className="contenedor">
       <h1 className="titulo">Mis Citas Agendadas</h1>
@@ -41,8 +47,8 @@ export default function CitasAgendadas() {
             <img src={cita.imagen} alt={cita.medico} className="imagen" />
             <h3 className="nombre">{cita.medico}</h3>
             <p className="especialidad">{cita.especialidad}</p>
-            <p>{cita.fecha}</p>
-            <p>{cita.hora}</p>
+            <p><span>Fecha:</span>{cita.fecha}</p>
+            <p><span>Hora:</span> {cita.hora}</p>
             <p
               className={`estado ${
                 cita.estado === "Confirmada"
@@ -54,6 +60,12 @@ export default function CitasAgendadas() {
             >
               {cita.estado}
             </p>
+            <button 
+              className="boton-chat"
+              onClick={() => handleChatClick(cita.medico)}
+            >
+              Chatear con el Doctor
+            </button>
           </div>
         ))}
       </div>
