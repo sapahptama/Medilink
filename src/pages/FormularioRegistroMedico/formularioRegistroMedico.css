@@ -1,0 +1,28 @@
+/* Formularioregistromedico.css */
+.formulario-medico {
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 25px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(13, 110, 110, 0.15);
+}
+
+.formulario-medico h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #0d6e6e;
+}
+
+.formulario-medico label {
+  font-weight: 600;
+  color: #0d6e6e;
+}
+
+.formulario-medico input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #c2e9e9;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}

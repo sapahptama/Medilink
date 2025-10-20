@@ -1,0 +1,20 @@
+ /* MedicosDisponibles.css */
+.medicos-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 15px;
+  margin: 30px;
+}
+
+.medico-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 15px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(13, 110, 110, 0.1);
+}
+
+.medico-card h3 {
+  margin-top: 10px;
+  color: #0d6e6e;
+}

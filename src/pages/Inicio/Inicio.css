@@ -1,0 +1,83 @@
+/* Inicio.css */
+
+.inicio-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: "Inter", Arial, sans-serif;
+  background: #f4f9f9;
+}
+
+/* Header */
+.inicio-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #0d6e6e;
+  padding: 12px 20px;
+  border-radius: 12px;
+  color: #fff;
+}
+
+.inicio-header h1 {
+  font-size: 1.2rem;
+}
+
+/* Barra de búsqueda */
+.busqueda {
+  display: flex;
+  gap: 10px;
+  margin: 15px 0;
+}
+
+.busqueda input,
+.busqueda select {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #c2e9e9;
+  border-radius: 8px;
+}
+
+.busqueda button {
+  background: #0d6e6e;
+  color: #fff;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.busqueda button:hover {
+  background: #00a8a8;
+}
+
+/* Tarjetas de opciones */
+.opciones {
+  display: flex;
+  gap: 15px;
+  margin: 20px 0;
+  flex-wrap: wrap;
+}
+
+.opcion-card {
+  flex: 1 1 200px;
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(13, 110, 110, 0.1);
+}
+
+.opcion-card h3 {
+  margin-top: 10px;
+  color: #0d6e6e;
+}
+
+/* Bloques de información */
+.info-bloque {
+  background: #fff;
+  border-radius: 12px;
+  padding: 15px;
+  margin: 15px 0;
+  box-shadow: 0 4px 12px rgba(13, 110, 110, 0.08);
+}

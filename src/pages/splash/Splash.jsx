@@ -10,7 +10,7 @@ function Splash() {
     // ⏳ Este efecto se ejecuta cuando carga la pantalla
     // Espera 3 segundos y después nos lleva a la ruta "/inicio"
     const timer = setTimeout(() => {
-      navigate("/inicio");
+      navigate("/login");
     }, 3000);
 
     // 🔄 Limpieza del temporizador si el componente se desmonta

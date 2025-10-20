@@ -1,0 +1,127 @@
+.principal-medico-container {
+  max-width: 900px;
+  margin: 40px auto;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  padding: 20px;
+  background-color: #f4f7f9;
+}
+
+.principal-medico-container h1 {
+  text-align: center;
+  color: #0d6e6e;
+  margin-bottom: 25px;
+}
+.listado-medicos {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+
+.card-medico {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 18px 22px;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 1px solid #e6ebf1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.card-medico:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+  border-color: #cfd8e3;
+  background-color: #fdfefe;
+}
+
+.card-medico h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #0d6e6e; 
+  margin-bottom: 6px;
+}
+
+.card-medico p {
+  font-size: 0.95rem;
+  color: #444;
+  margin: 3px 0;
+  line-height: 1.5;
+}
+
+.card-medico .especialidad {
+  display: inline-block;
+  background: #e9f6f6;
+  color: #0d6e6e;
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: 4px 10px;
+  border-radius: 20px;
+  margin-top: 10px;
+}
+
+.detalle-medico-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(13, 110, 110, 0.35);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 25px;
+  z-index: 1000;
+  backdrop-filter: blur(3px); 
+}
+
+.detalle-medico-modal .contenido {
+  background: #fff;
+  padding: 30px;
+  border-radius: 18px;
+  max-width: 650px;
+  width: 100%;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+  position: relative;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+
+.cerrar-btn {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 34px;
+  height: 34px;
+  cursor: pointer;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.cerrar-btn:hover {
+  background-color: #a71d2a;
+  transform: scale(1.1);
+}
+
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+

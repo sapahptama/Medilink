@@ -1,0 +1,43 @@
+/* Citasdelmedico.css */
+.citas-medico-container {
+  max-width: 900px;
+  margin: 30px auto;
+  padding: 20px;
+  font-family: "Inter", Arial, sans-serif;
+}
+
+.citas-medico-container h2 {
+  color: #0d6e6e;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.tabla-citas {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 6px 18px rgba(13, 110, 110, 0.08);
+}
+
+.tabla-citas th,
+.tabla-citas td {
+  padding: 12px 15px;
+  border-bottom: 1px solid #e6f4f4;
+}
+
+.tabla-citas th {
+  background: #0d6e6e;
+  color: #fff;
+}
+
+.estado-confirmada {
+  color: #207227;
+  font-weight: bold;
+}
+
+.estado-pendiente {
+  color: #856404;
+  font-weight: bold;
+}

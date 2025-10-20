@@ -1,0 +1,127 @@
+.vista-medico-container {
+  max-width: 750px;
+  margin: 40px auto;
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 18px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
+  font-family: "Segoe UI", Arial, sans-serif;
+  position: relative;
+  transition: all 0.3s ease-in-out;
+}
+
+.vista-medico-container:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+}
+
+
+.header-medico {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #e9ecef;
+  padding-bottom: 20px;
+  margin-bottom: 25px;
+  gap: 20px;
+}
+
+.avatar-medico {
+  width: 95px;
+  height: 95px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  border: 3px solid #0d6efd20;
+  box-shadow: 0 4px 10px rgba(13, 110, 253, 0.1);
+}
+
+.avatar-medico img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.info-medico {
+  flex: 1;
+}
+
+.nombre-medico {
+  margin: 0;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #0d6efd;
+}
+
+.especialidad-medico {
+  font-size: 1rem;
+  color: #6c757d;
+  margin-top: 4px;
+}
+
+.calificacion {
+  display: flex;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.calificacion svg {
+  margin-right: 3px;
+}
+
+.calificacion span {
+  margin-left: 6px;
+  color: #343a40;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+
+.detalle-medico p {
+  margin: 12px 0;
+  font-size: 1rem;
+  color: #495057;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.detalle-medico p strong {
+  color: #212529;
+  font-weight: 600;
+}
+
+
+.icono {
+  color: #0d6efd;
+  flex-shrink: 0;
+}
+
+
+.detalle-medico p:hover {
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  padding: 6px 10px;
+  transition: background 0.3s ease;
+}
+
+
+@media (max-width: 600px) {
+  .vista-medico-container {
+    padding: 20px;
+  }
+
+  .header-medico {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .avatar-medico {
+    width: 110px;
+    height: 110px;
+  }
+
+  .detalle-medico p {
+    font-size: 0.95rem;
+  }
+}
+
