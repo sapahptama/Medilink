@@ -1,65 +1,127 @@
 .vista-medico-container {
-  max-width: 700px;
-  margin: 30px auto;
-  padding: 25px;
-  background-color: #f8f9fa;
-  border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-  font-family: Arial, sans-serif;
+  max-width: 750px;
+  margin: 40px auto;
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 18px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
+  font-family: "Segoe UI", Arial, sans-serif;
   position: relative;
+  transition: all 0.3s ease-in-out;
 }
+
+.vista-medico-container:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+}
+
 
 .header-medico {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+  border-bottom: 1px solid #e9ecef;
+  padding-bottom: 20px;
+  margin-bottom: 25px;
+  gap: 20px;
 }
 
-.btn-acciones {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 6px 12px;
-  border-radius: 6px;
-  cursor: pointer;
+.avatar-medico {
+  width: 95px;
+  height: 95px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  border: 3px solid #0d6efd20;
+  box-shadow: 0 4px 10px rgba(13, 110, 253, 0.1);
 }
 
-.btn-acciones:hover {
-  background-color: #0056b3;
+.avatar-medico img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-.dropdown-menu {
-  list-style: none;
-  padding: 0;
-  margin: 5px 0 0 0;
-  background-color: white;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  position: absolute;
-  z-index: 10;
+.info-medico {
+  flex: 1;
 }
 
-.dropdown-item {
-  padding: 10px 15px;
-  width: 150px;
-  text-align: left;
-  background: none;
-  border: none;
-  cursor: pointer;
+.nombre-medico {
+  margin: 0;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #0d6efd;
 }
 
-.dropdown-item:hover {
-  background-color: #f0f0f0;
+.especialidad-medico {
+  font-size: 1rem;
+  color: #6c757d;
+  margin-top: 4px;
 }
+
+.calificacion {
+  display: flex;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.calificacion svg {
+  margin-right: 3px;
+}
+
+.calificacion span {
+  margin-left: 6px;
+  color: #343a40;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
 
 .detalle-medico p {
-  margin: 10px 0;
-  font-size: 16px;
+  margin: 12px 0;
+  font-size: 1rem;
   color: #495057;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .detalle-medico p strong {
   color: #212529;
+  font-weight: 600;
 }
+
+
+.icono {
+  color: #0d6efd;
+  flex-shrink: 0;
+}
+
+
+.detalle-medico p:hover {
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  padding: 6px 10px;
+  transition: background 0.3s ease;
+}
+
+
+@media (max-width: 600px) {
+  .vista-medico-container {
+    padding: 20px;
+  }
+
+  .header-medico {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .avatar-medico {
+    width: 110px;
+    height: 110px;
+  }
+
+  .detalle-medico p {
+    font-size: 0.95rem;
+  }
+}
+
