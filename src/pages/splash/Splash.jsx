@@ -27,6 +27,7 @@ function Splash() {
       {/* 🟣 Nuestro lema */}
       <p className="splash-tagline">"Conectando Pacientes y salud :)."</p>
     </div>
+    
   );
 }
 
