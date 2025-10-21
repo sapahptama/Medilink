@@ -1,9 +1,9 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import RecuperarContrasena from "./pages/RecuperarContrasena/RecuperarContrasena.jsx";
-import CitasDelMedico from "./pages/Citas/citasdelmedico.jsx";
+import CitasDelMedico from "./pages/Citas/Citasdelmedico.jsx";
 import Login from "./pages/login/login.jsx";
 import Inicio from "./pages/Inicio/Inicio.jsx";
-import Splash from "./pages/Splash/Splash.jsx";
+import Splash from "./pages/splash/Splash.jsx";
 import RegistroPacientes from "./pages/RegistroPacientes/RegistroPacientes.jsx";
 import AvailableDoctors from "./pages/MedicosDisponibles/Medicos_disponibles.jsx";
 import CitasList from "./pages/CitasUsuarios/citasUsuarios.jsx";
@@ -16,19 +16,22 @@ import Pagar from "./pages/Pagar/Pagar.jsx";
 import PerfilPaciente from "./pages/Perfil/Perfil.jsx";
 import Agendar from "./pages/Agendar/Agendar.jsx";
 import UserProfile from "./pages/PerfilMedico/PerfilMedico.jsx";
-import SeleccionRegistro from "./pages/SeleccionRegistro/SeleccionRegistro.jsx";
-
+import SeleccionRegistro from "./pages/Pagar/SeleccionRegistro/SeleccionRegistro.jsx";
+import Ajustes from "./pages/Ajustes/Ajustes.jsx";
+import Notificaciones from "./pages/Notificaciones/Notificaciones.jsx";
 function App() {
   return (
     <>
       <div>
-        <ul>
+        {/* <ul>
           <li><a href="/">inicio</a></li>
           <li><a href="/SeleccionRegistro">seleccion registro</a></li>
           <li><a href="/citasdelmedico">citas</a></li>
           <li><a href="/Recuperar">recuperar contraseña</a></li>
           <li><a href="inicio">inicio pacientes</a></li>
           <li><a href="login">login</a></li>
+          <li><a href="ajustes">ajustes</a></li>
+          <li><a href="notificaciones">notificaciones</a></li>
           <hr />
           <li><a href="registro-paciente">registro paciente</a></li>
           <li><a href="medicos-disponibles">medicos disponibles</a></li>
@@ -44,12 +47,11 @@ function App() {
           <li><a href="perfil">perfil</a></li>
           <li><a href="agendar">agendar citas</a></li>
           <li><a href="citas-del-usuario">citas del usuario</a></li>
-        </ul>
+        </ul> */}
       </div>
       <Router>
 
         <Routes>
-
           {/* Maria José */}
           <Route path="/" element={<Splash />} />
           <Route path="/citasdelmedico" element={<CitasDelMedico />} />
@@ -57,7 +59,9 @@ function App() {
           <Route path="/inicio" element={<Inicio />} />
           <Route path="/login" element={<Login />} />
           <Route path="/SeleccionRegistro" element={<SeleccionRegistro />} />
-          {/* Fin Maria José */}
+          <Route path="/Ajustes" element={<Ajustes />} />
+          <Route path="/Notificaciones" element={<Notificaciones />} />
+
           {/* Yenifer */}
           <Route path="/registro-paciente" element={<RegistroPacientes />} />
           <Route path="/medicos-disponibles" element={<AvailableDoctors />} />

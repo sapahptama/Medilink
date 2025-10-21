@@ -1,5 +1,5 @@
 import React from "react";
-import "./CitasDelMedico.css";
+import "./Citasdelmedico.css";
 
 function CitasDelMedico() {
   return (

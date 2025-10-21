@@ -2,9 +2,6 @@ import React, { useState, useRef } from "react";
 import "./formularioRegistroMedico.css";
 
 
-
-
-
 function VistaMedico({ medico, onVolver }) {
   return (
     <div className="vista-medico">
@@ -72,7 +69,7 @@ const ESPECIALIDADES = [
   "Otros"
 ];
 
-export default function ormularioRegistroMedico() {
+export default function FormularioRegistroMedico() {
   const [formulario, setFormulario] = useState({
     nombre: "",
     apellidos: "",
@@ -85,8 +82,8 @@ export default function ormularioRegistroMedico() {
     especialidad: "",
     universidad: "",
     experiencia: "",
-    contraseña: "",
-    confirmarContraseña: "",
+    contrasena: "",
+    confirmarContrasena: "",
     hojaVida: null,
     documentoIdentidad: null,
     diplomas: null,
@@ -102,7 +99,6 @@ export default function ormularioRegistroMedico() {
   });
 
   const [mostrarPerfil, setMostrarPerfil] = useState(false);
-  const [redirectToVistaMedico, setRedirectToVistaMedico] = useState(false);
 
   const hojaVidaRef = useRef();
   const documentoIdentidadRef = useRef();
@@ -111,15 +107,15 @@ export default function ormularioRegistroMedico() {
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
-    setFormulario({
-      ...formulario,
+    setFormulario((prev) => ({
+      ...prev,
       [name]: files ? files[0] : value,
-    });
+    }));
     if (files) {
-      setFileNames({
-        ...fileNames,
+      setFileNames((prev) => ({
+        ...prev,
         [name]: files[0]?.name || "",
-      });
+      }));
     }
   };
 
@@ -129,19 +125,18 @@ export default function ormularioRegistroMedico() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (formulario.contraseña !== formulario.confirmarContraseña) {
+    if (formulario.contrasena !== formulario.confirmarContrasena) {
       alert("Las contraseñas no coinciden");
       return;
     }
+    // Aquí podrías enviar 'formulario' a tu API
     alert("¡Médico registrado con éxito!");
-    setRedirectToVistaMedico(true);
+    setMostrarPerfil(true); // mostrar perfil en la misma vista
   };
 
- 
-  if (redirectToVistaMedico) {
-    window.location.href = '/vistamedico';
-    return null;
-  }
+  const handleVolver = () => {
+    setMostrarPerfil(false);
+  };
 
   return (
     <div className="formulario-container">
@@ -149,9 +144,6 @@ export default function ormularioRegistroMedico() {
         <>
           <h2>Registro de Médico</h2>
           <form onSubmit={handleSubmit} className="formulario-medico">
-          
-
-          
             <div className="grupo">
               <label>Nombre:</label>
               <input
@@ -213,7 +205,6 @@ export default function ormularioRegistroMedico() {
               />
             </div>
 
-           
             <div className="grupo">
               <label>Número de Registro Profesional:</label>
               <input
@@ -275,14 +266,13 @@ export default function ormularioRegistroMedico() {
             {/* Seguridad */}
             <div className="grupo">
               <label>Contraseña:</label>
-              <input type="password" name="contraseña" onChange={handleChange} required />
+              <input type="password" name="contrasena" onChange={handleChange} required />
             </div>
             <div className="grupo">
               <label>Confirmar contraseña:</label>
-              <input type="password" name="confirmarContraseña" onChange={handleChange} required />
+              <input type="password" name="confirmarContrasena" onChange={handleChange} required />
             </div>
 
-            
             <div className="grupo">
               <label>Hoja de Vida (PDF):</label>
               {!fileNames.hojaVida && (
@@ -391,4 +381,4 @@ export default function ormularioRegistroMedico() {
 }
 
 
- 
+

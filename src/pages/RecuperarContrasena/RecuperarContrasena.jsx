@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import "./RecuperarContrasena.css";
 
 function RecuperarContrasena() {
@@ -40,7 +41,7 @@ function RecuperarContrasena() {
       {mensaje && <p className="mensaje-exito">{mensaje}</p>}
 
       <p className="volver-inicio">
-        <a href="/">Volver al inicio de sesión</a>
+        <Link to="/">Volver al inicio de sesión</Link>
       </p>
     </div>
   );
