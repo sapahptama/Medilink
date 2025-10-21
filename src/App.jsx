@@ -56,7 +56,7 @@ function App() {
           <Route path="/" element={<Splash />} />
           <Route path="/citasdelmedico" element={<CitasDelMedico />} />
           <Route path="/Recuperar" element={<RecuperarContrasena />} />
-          <Route path="/inicio" element={<Inicio />} />
+          <Route path="/inicio-paciente" element={<Inicio />} />
           <Route path="/login" element={<Login />} />
           <Route path="/SeleccionRegistro" element={<SeleccionRegistro />} />
           <Route path="/Ajustes" element={<Ajustes />} />

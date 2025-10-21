@@ -10,7 +10,7 @@ export default function Ajustes() {
     <div className="ajustes-container">
       {/* HEADER */}
       <header className="ajustes-header">
-        <button className="back-btn" onClick={() => navigate("/inicio")}>
+        <button className="back-btn" onClick={() => navigate("/inicio-paciente")}>
           <FaArrowLeft />
         </button>
         <h2>Ajustes</h2>

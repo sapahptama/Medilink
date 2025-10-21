@@ -23,7 +23,7 @@ export default function Notificaciones() {
     <div className="notif-container">
       {/* HEADER */}
       <header className="notif-header">
-        <button className="back-btn" onClick={() => navigate("/inicio")}>
+        <button className="back-btn" onClick={() => navigate("/inicio-paciente")}>
           <FaArrowLeft />
         </button>
         <h2>Notificaciones</h2>

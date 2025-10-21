@@ -22,7 +22,7 @@ export default function Pagar() {
 
   // Función de volver 
   const handleBack = () => {
-    navigate("/inicio"); // <-- va a inicio
+    navigate("/inicio-paciente"); // <-- va a inicio
     // Si prefieres "volver a la página anterior" usa: navigate(-1)
   };
 

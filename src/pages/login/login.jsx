@@ -1,21 +1,41 @@
-import { Link, useNavigate } from 'react-router-dom'; // <-- agregamos useNavigate
-import React, { useState } from "react";
+import { Link, useNavigate } from 'react-router-dom';
+import React, { useState, useContext } from "react";
 import "./login.css";
+import { UserContext } from "../../context/UserContext";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate(); // <-- inicializamos navigate
+  const navigate = useNavigate();
+  const { setUsuario } = useContext(UserContext);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Email:", email);
-    console.log("Password:", password);
 
-    // Aquí podrías validar el login con una API
+    try {
+      const response = await fetch("http://localhost:4001/usuarios/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ correo: email, contrasena: password }),
+      });
 
-    // Redirige a /inicio
-    navigate("/inicio");
+      if (!response.ok) {
+        const error = await response.json();
+        alert(error.error || "Error al iniciar sesión");
+        return;
+      }
+
+      const data = await response.json();
+
+      // ✅ Guarda el usuario globalmente
+      setUsuario(data.usuario);
+
+      // ✅ Navega al inicio
+      navigate("/inicio-paciente");
+    } catch (err) {
+      console.error(err);
+      alert("No se pudo conectar con el servidor");
+    }
   };
 
   return (

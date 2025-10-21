@@ -53,7 +53,7 @@ export default function Perfil() {
   return (
     <div className="perfil-root">
       {/* Flecha siempre a /inicio */}
-      <button className="perfil-back" onClick={() => navigate("/inicio")} aria-label="Volver a inicio">
+      <button className="perfil-back" onClick={() => navigate("/inicio-paciente")} aria-label="Volver a inicio">
         <FaArrowLeft /> <span>Inicio</span>
       </button>
 

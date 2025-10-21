@@ -28,7 +28,7 @@ function CitasUsuarios() {
   return (
     <div className="citasusuarios-container">
       {/* Flecha para volver */}
-      <div className="back-button" onClick={() => navigate("/inicio")}>
+      <div className="back-button" onClick={() => navigate("/inicio-paciente")}>
         <FaArrowLeft size={18} /> <span>Inicio</span>
       </div>
 

@@ -9,7 +9,7 @@ export default function Menu() {
     <div className="inicio-container">
       {/* Menú inferior */}
       <nav className="menu-bottom">
-        <button onClick={() => navigate("/inicio")}><FaHome /></button>
+        <button onClick={() => navigate("/inicio-paciente")}><FaHome /></button>
         <button onClick={() => navigate("/citas-del-usuario")}><FaCalendarAlt /></button>
         <button onClick={() => navigate("/notificaciones")}><FaBell /></button>
         <button onClick={() => navigate("/perfil")}><FaUser /></button>
