@@ -2,6 +2,26 @@
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
+  display: flex;
+}
+
+/* Centrar contenido dentro de #root */
+#root {
+  display: flex;
+  align-items: center;      /* centra verticalmente */
+  justify-content: center;  /* centra horizontalmente */
+  flex-direction: column;   /* opcional: apila hijos en columna */
+  width: 100vw;
+  min-height: 100vh;
+  background: linear-gradient(120deg, var(--accent-color) 0%, var(--light-color) 100%);
+}
+
+/* Asegura que el DIV interno tenga un max-width y quede centrado */
+#root > div {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  box-sizing: border-box;
 }
 
 .logo {
@@ -71,10 +91,10 @@ body {
   padding: 2.2rem 2.7rem;
   margin: 2.5rem auto 0 auto;
   box-shadow: 0 6px 32px rgba(129, 216, 208, 0.13), 0 1.5px 6px var(--secondary-color);
-  max-width: 440px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 80%
 }
 
 label {

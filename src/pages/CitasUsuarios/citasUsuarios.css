@@ -16,6 +16,8 @@
   cursor: pointer;
   font-weight: 600;
   margin-bottom: 20px;
+  font-size: 2rem;
+  font-weight: 600;
 }
 
 h2 {
@@ -67,4 +69,47 @@ h2 {
   background: #B8F2F3;
   padding: 12px;
   border-radius: 8px;
+}
+
+.boton-chat:hover {
+  background: linear-gradient(135deg, #0b5c5c, #119494);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(13, 110, 110, 0.3);
+}
+
+.boton-chat:active {
+  transform: translateY(0);
+}
+
+.boton-chat::before {
+  content: '💬';
+  font-size: 1.1rem;
+}
+
+/* Responsive */
+/* En la sección Responsive, modifica esto: */
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .contenedor {
+    padding: 0px;
+  }
+  
+  .titulo {
+    font-size: 1.8rem;
+  }
+  
+  .card {
+    padding: 10px;
+  }
+  
+  /* AGREGAR ESTO ↓ */
+  .card p:not(.estado) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
 }

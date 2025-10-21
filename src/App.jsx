@@ -3,7 +3,7 @@ import RecuperarContrasena from "./pages/RecuperarContrasena/RecuperarContrasena
 import CitasDelMedico from "./pages/Citas/Citasdelmedico.jsx";
 import Login from "./pages/login/login.jsx";
 import Inicio from "./pages/Inicio/Inicio.jsx";
-import Splash from "./pages/Splash/Splash.jsx";
+import Splash from "./pages/splash/Splash.jsx";
 import RegistroPacientes from "./pages/RegistroPacientes/RegistroPacientes.jsx";
 import AvailableDoctors from "./pages/MedicosDisponibles/Medicos_disponibles.jsx";
 import CitasList from "./pages/CitasUsuarios/citasUsuarios.jsx";
@@ -52,7 +52,6 @@ function App() {
       <Router>
 
         <Routes>
-
           {/* Maria José */}
           <Route path="/" element={<Splash />} />
           <Route path="/citasdelmedico" element={<CitasDelMedico />} />

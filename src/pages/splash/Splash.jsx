@@ -24,7 +24,6 @@ function Splash() {
 
       {/* 🔵 Nombre de la app */}
       <h1 className="splash-title">MediLink</h1>
-
       {/* 🟣 Nuestro lema */}
       <p className="splash-tagline">"Conectando Pacientes y salud :)."</p>
     </div>
