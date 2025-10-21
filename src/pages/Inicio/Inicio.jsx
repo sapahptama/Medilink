@@ -125,7 +125,6 @@ function Inicio() {
             </button>
           </div>
         </div>
-
         {/* ACCIONES RÁPIDAS */}
         <div className="quick-actions">
           <button 

@@ -1,20 +1,151 @@
-/* Perfil.css */
-.perfil-container {
-  max-width: 600px;
-  margin: 30px auto;
-  padding: 25px;
-  background: #fff;
-  border-radius: 16px;
-  box-shadow: 0 6px 18px rgba(13, 110, 110, 0.15);
-  text-align: center;
+/* Paleta tomada de tus imágenes:
+   primary:  #2E6E71  (oscuro)
+   bg-soft:  #DDF4F1  (fondo suave)
+   accent:   #B8F2F3  (highlight claro)
+*/
+
+.perfil-root {
+  min-height: 100vh;
+  padding: 22px;
+  background: #DDF4F1;
+  box-sizing: border-box;
+  font-family: Inter, "Segoe UI", Arial, sans-serif;
+  color: #1f2d2d;
 }
 
-.perfil-container img {
-  width: 100px;
+/* Back button (siempre visible, lleva a /inicio) */
+.perfil-back {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  background: none;
+  border: none;
+  color: #2E6E71;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 6px 0;
+  margin-bottom: 14px;
+}
+
+/* Título */
+.perfil-title {
+  color: #2E6E71;
+  margin: 6px 0 18px 0;
+}
+
+/* Top: foto + cambiar */
+.perfil-top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.perfil-foto img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
   border-radius: 50%;
-  margin-bottom: 15px;
+  border: 3px solid #2E6E71;
+  background: white;
 }
 
-.perfil-container h2 {
-  color: #0d6e6e;
+/* label para cambiar foto */
+.perfil-cambiar-foto {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  color: #2E6E71;
+  cursor: pointer;
+  font-size: 14px;
+  background: #B8F2F3;
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(46,110,113,0.12);
+}
+
+/* Card con datos */
+.perfil-card {
+  width: 100%;
+  max-width: 520px;
+  background: #fff;
+  border-radius: 12px;
+  padding: 18px;
+  box-shadow: 0 6px 20px rgba(46,110,113,0.06);
+  border: 1px solid rgba(46,110,113,0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-left: auto;    /* Centra hacia la derecha */
+  margin-right: 0;      /* Asegura que quede pegado a la derecha */
+}
+
+/* fila de campo */
+.perfil-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 15px;
+  color: #213434;
+}
+
+/* icono al inicio de la fila */
+.perfil-icon { color: #2E6E71; font-size: 18px; }
+
+/* input en edición */
+.perfil-row input {
+  flex: 1;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid #d6e9e8;
+  font-size: 14px;
+  color: #0b2b2b;
+}
+
+/* datos en vista */
+.perfil-value { color: #213434; }
+
+/* acciones (botones) */
+.perfil-actions {
+  margin-top: 18px;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* botón base */
+.btn {
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+/* editar: primary oscuro */
+.btn.editar {
+  background: #2E6E71;
+  color: #fff;
+}
+
+/* guardar: punto medio */
+.btn.guardar {
+  background: #B8F2F3;
+  color: #0b3b3b;
+  border: 1px solid rgba(46,110,113,0.08);
+}
+
+/* logout: sutil */
+.btn.logout {
+  background: #fff;
+  color: #2E6E71;
+  border: 1px solid rgba(46,110,113,0.12);
+}
+
+/* responsive */
+@media (max-width: 720px) {
+  .perfil-card { padding: 14px; }
+  .perfil-foto img { width: 96px; height: 96px; }
 }

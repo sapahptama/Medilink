@@ -1,9 +1,9 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./agendar.css";
 
 const Agendar = () => {
   const [form, setForm] = useState({ 
-    medico: "", 
     fecha: "", 
     hora: "", 
     motivo: "",
@@ -11,12 +11,7 @@ const Agendar = () => {
   });
   
   const [citasAgendadas, setCitasAgendadas] = useState([]);
-  
-  const medicos = [
-    { id: 1, nombre: "yidis iriana cuesta", motivo: "gripa intensa" },
-    { id: 2, nombre: "David mejia", motivo: "grano con dolor en el area del brazo" },
-    { id: 3, nombre: "Marta Ruiz", motivo: "dolor intenso en el area abdominal" }
-  ];
+  const navigate = useNavigate();
 
   const handleChange = e => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -30,7 +25,8 @@ const Agendar = () => {
       estado: 'pendiente'
     };
     setCitasAgendadas([...citasAgendadas, nuevaCita]);
-    setForm({ medico: "", fecha: "", hora: "", motivo: "", tipo: "consulta" });
+    setForm({ fecha: "", hora: "", motivo: "", tipo: "consulta" });
+    navigate("/pagar"); // Redirige a la página de pago
   };
 
   return (
@@ -45,18 +41,6 @@ const Agendar = () => {
             <option value="control">Control</option>
             <option value="emergencia">Emergencia</option>
             <option value="examen">Examen Médico</option>
-          </select>
-        </label>
-
-        <label>
-          Médico
-          <select name="medico" value={form.medico} onChange={handleChange} required>
-            <option value="">Seleccione un médico</option>
-            {medicos.map(m => (
-              <option key={m.id} value={m.nombre}>
-                {m.nombre} - {m.especialidad}
-              </option>
-            ))}
           </select>
         </label>
 
@@ -91,7 +75,6 @@ const Agendar = () => {
           <div className="citas-lista">
             {citasAgendadas.map(cita => (
               <div key={cita.id} className="cita-item">
-                <span><strong>Médico:</strong> {cita.medico}</span>
                 <span><strong>Fecha:</strong> {cita.fecha} {cita.hora}</span>
                 <span><strong>Motivo:</strong> {cita.motivo}</span>
               </div>
