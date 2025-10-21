@@ -361,7 +361,7 @@ export default function FormularioRegistroMedico() {
                 type="file"
                 name="foto"
                 accept="image/*"
-                ref={fotoRef}
+               ref={fotoRef}
                 style={{ display: "none" }}
                 onChange={handleChange}
                 required
