@@ -16,7 +16,7 @@ import Pagar from "./pages/Pagar/Pagar.jsx";
 import PerfilPaciente from "./pages/Perfil/Perfil.jsx";
 import Agendar from "./pages/Agendar/Agendar.jsx";
 import UserProfile from "./pages/PerfilMedico/PerfilMedico.jsx";
-import SeleccionRegistro from "./pages/Perfil/SeleccionRegistro/SeleccionRegistro.jsx";
+import SeleccionRegistro from "./pages/SeleccionRegistro/SeleccionRegistro.jsx";
 
 function App() {
   return (
