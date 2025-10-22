@@ -1,120 +1,120 @@
-import { useState } from 'react'
-import '../../App.css'
+import React, { useState, useContext } from "react";
+import "../../App.css";
+import { UserContext } from "../../context/UserContext";
+import { useNavigate } from "react-router-dom";
 
-function PaginaFormulario() {
+export default function RegistroPaciente() {
   const [form, setForm] = useState({
-    nombre: '',
-    email: '',
-    password: '',
-    enfermedades: '',
-    eps: '',
-    tipoDocumento: ''
-  })
-  const [submitted, setSubmitted] = useState(false)
+    nombre: "",
+    apellido: "",
+    correo: "",
+    telefono: "",
+    direccion: "",
+    contrasena: "",
+    confirmarContrasena: "",
+    tipoDocumento: "",
+    numeroDocumento: "",
+    eps: "",
+    enfermedades: ""
+  });
+
+  const [loading, setLoading] = useState(false);
+  const { setUsuario } = useContext(UserContext);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value
-    })
-  }
+    const { name, value } = e.target;
+    setForm({ ...form, [name]: value });
+  };
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    setSubmitted(true)
-  }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (form.contrasena !== form.confirmarContrasena) {
+      alert("Las contraseñas no coinciden");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const res = await fetch("http://localhost:4001/pacientes", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form)
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        alert(data.error || "Error al registrar paciente");
+        setLoading(false);
+        return;
+      }
+
+      alert("✅ Registro exitoso");
+      setUsuario({
+        nombre: form.nombre,
+        apellido: form.apellido,
+        correo: form.correo,
+        rol: "paciente"
+      });
+
+      navigate("/inicio-paciente");
+    } catch (err) {
+      console.error(err);
+      alert("Error de conexión con el servidor");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
-    <>
-      
-      <h1>Formulario de Usuario</h1>
-      <form onSubmit={handleSubmit} className="card">
-        <label>
-          Nombre:
-          <input
-            type="text"
-            name="nombre"
-            value={form.nombre}
-            onChange={handleChange}
-            required
-          />
-        </label>
-        <br />
-        <label>
-          Email:
-          <input
-            type="email"
-            name="email"
-            value={form.email}
-            onChange={handleChange}
-            required
-          />
-        </label>
-        <br />
-        <label>
-          Contraseña:
-          <input
-            type="password"
-            name="password"
-            value={form.password}
-            onChange={handleChange}
-            required
-          />
-        </label>
-        <br />
-        <label>
-          ¿De qué enfermedades sufres?
-          <textarea
-            name="enfermedades"
-            value={form.enfermedades}
-            onChange={handleChange}
-            placeholder="Ejemplo: Diabetes, hipertensión, etc."
-            rows={2}
-            required
-          />
-        </label>
-        <br />
-        <label>
-          EPS:
-          <input
-            type="text"
-            name="eps"
-            value={form.eps}
-            onChange={handleChange}
-            required
-          />
-        </label>
-        <br />
-        <label>
-          Tipo de documento:
-          <select
-            name="tipoDocumento"
-            value={form.tipoDocumento}
-            onChange={handleChange}
-            required
-          >
-            <option value="">Seleccione...</option>
-            <option value="CC">Cédula de Ciudadanía</option>
-            <option value="TI">Tarjeta de Identidad</option>
-            <option value="CE">Cédula de Extranjería</option>
-            <option value="PA">Pasaporte</option>
-          </select>
-        </label>
-        <br />
-        <button type="submit">Enviar</button>
-      </form>
-      {submitted && (
-        <div className="result">
-          <h2>Datos enviados:</h2>
-          <p>Nombre: {form.nombre}</p>
-          <p>Email: {form.email}</p>
-          <p>Enfermedades: {form.enfermedades}</p>
-          <p>EPS: {form.eps}</p>
-          <p>Tipo de documento: {form.tipoDocumento}</p>
-        </div>
-      )}
-    </>
-  )
-}
+    <div className="registro-paciente-container">
+      <h2>Registro de Paciente</h2>
+      <form className="registro-paciente-form" onSubmit={handleSubmit}>
+        <label>Nombre:</label>
+        <input type="text" name="nombre" onChange={handleChange} required />
 
-export default PaginaFormulario
+        <label>Apellido:</label>
+        <input type="text" name="apellido" onChange={handleChange} required />
+
+        <label>Correo:</label>
+        <input type="email" name="correo" onChange={handleChange} required />
+
+        <label>Teléfono:</label>
+        <input type="tel" name="telefono" onChange={handleChange} required />
+
+        <label>Dirección:</label>
+        <input type="text" name="direccion" onChange={handleChange} required />
+
+        <label>Tipo de documento:</label>
+        <select name="tipoDocumento" onChange={handleChange} required>
+          <option value="">Seleccione...</option>
+          <option value="CC">Cédula de Ciudadanía</option>
+          <option value="TI">Tarjeta de Identidad</option>
+          <option value="CE">Cédula de Extranjería</option>
+          <option value="PA">Pasaporte</option>
+        </select>
+
+        <label>Número de documento:</label>
+        <input type="text" name="numeroDocumento" onChange={handleChange} required />
+
+        <label>EPS:</label>
+        <input type="text" name="eps" onChange={handleChange} required />
+
+        <label>¿Enfermedades diagnosticadas?:</label>
+        <textarea name="enfermedades" rows="2" onChange={handleChange} />
+
+        <label>Contraseña:</label>
+        <input type="password" name="contrasena" onChange={handleChange} required />
+
+        <label>Confirmar contraseña:</label>
+        <input type="password" name="confirmarContrasena" onChange={handleChange} required />
+
+        <button type="submit" disabled={loading}>
+          {loading ? "Registrando..." : "Registrar Paciente"}
+        </button>
+      </form>
+    </div>
+  );
+}

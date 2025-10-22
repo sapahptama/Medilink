@@ -19,6 +19,7 @@ import UserProfile from "./pages/PerfilMedico/PerfilMedico.jsx";
 import SeleccionRegistro from "./pages/Pagar/SeleccionRegistro/SeleccionRegistro.jsx";
 import Ajustes from "./pages/Ajustes/Ajustes.jsx";
 import Notificaciones from "./pages/Notificaciones/Notificaciones.jsx";
+import InicioMedico from "./pages/InicioMedico/InicioMedico.jsx";
 function App() {
   return (
     <>
@@ -57,6 +58,7 @@ function App() {
           <Route path="/citasdelmedico" element={<CitasDelMedico />} />
           <Route path="/Recuperar" element={<RecuperarContrasena />} />
           <Route path="/inicio-paciente" element={<Inicio />} />
+          <Route path="/inicio-medico" element={<InicioMedico />} />
           <Route path="/login" element={<Login />} />
           <Route path="/SeleccionRegistro" element={<SeleccionRegistro />} />
           <Route path="/Ajustes" element={<Ajustes />} />

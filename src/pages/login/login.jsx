@@ -10,33 +10,39 @@ function Login() {
   const { setUsuario } = useContext(UserContext);
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    try {
-      const response = await fetch("http://localhost:4001/usuarios/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ correo: email, contrasena: password }),
-      });
+  try {
+    const response = await fetch("http://localhost:4001/usuarios/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ correo: email, contrasena: password }),
+    });
 
-      if (!response.ok) {
-        const error = await response.json();
-        alert(error.error || "Error al iniciar sesión");
-        return;
-      }
+    const data = await response.json();
 
-      const data = await response.json();
-
-      // ✅ Guarda el usuario globalmente
-      setUsuario(data.usuario);
-
-      // ✅ Navega al inicio
-      navigate("/inicio-paciente");
-    } catch (err) {
-      console.error(err);
-      alert("No se pudo conectar con el servidor");
+    if (!response.ok) {
+      alert(data.error || "Error al iniciar sesión");
+      return;
     }
-  };
+
+    // ✅ Guardar usuario globalmente
+    setUsuario(data.usuario);
+
+    // ✅ Redirigir según el rol devuelto por el servidor
+    if (data.usuario.rol === "medico") {
+      navigate("/inicio-medico");
+    } else if (data.usuario.rol === "paciente") {
+      navigate("/inicio-paciente");
+    } else {
+      navigate("/inicio");
+    }
+  } catch (err) {
+    console.error(err);
+    alert("No se pudo conectar con el servidor");
+  }
+};
+
 
   return (
     <div className="login-container">

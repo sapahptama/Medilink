@@ -1,0 +1,64 @@
+@import "../Inicio/Inicio.css";
+
+/* Sobrescribir colores y elementos específicos para médicos */
+.logo-icon {
+  background: linear-gradient(135deg, #0a4d68 0%, #05b0ff 100%);
+}
+
+.logo-text {
+  background: linear-gradient(135deg, #0a4d68 0%, #05b0ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.action-icon.teal {
+  background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+}
+.action-icon.blue {
+  background: linear-gradient(135deg, #dbeafe 0%, #93c5fd 100%);
+}
+.action-icon.purple {
+  background: linear-gradient(135deg, #ede9fe 0%, #c4b5fd 100%);
+}
+.action-icon.amber {
+  background: linear-gradient(135deg, #fef3c7 0%, #fcd34d 100%);
+}
+
+.action-icon.teal .icon {
+  color: #0d9488;
+}
+.action-icon.blue .icon {
+  color: #2563eb;
+}
+.action-icon.purple .icon {
+  color: #7c3aed;
+}
+.action-icon.amber .icon {
+  color: #d97706;
+}
+
+.welcome-title {
+  color: #0a4d68;
+}
+
+.next-appointment-card {
+  background: linear-gradient(135deg, #0a4d68 0%, #05b0ff 100%);
+}
+
+.btn-primary {
+  background: white;
+  color: #0a4d68;
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+.title-icon.red {
+  color: #ef4444;
+}
+
+.bottom-navigation .nav-item.active::before {
+  background: linear-gradient(135deg, #0a4d68 0%, #05b0ff 100%);
+}
