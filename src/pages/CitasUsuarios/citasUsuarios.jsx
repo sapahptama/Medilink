@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { FaArrowLeft, FaCalendarAlt, FaClock, FaUserMd, FaHospital } from "react-icons/fa";
-import "./CitasUsuarios.css";
+import "./citasUsuarios.css";
 
 function CitasUsuarios() {
   const navigate = useNavigate();
