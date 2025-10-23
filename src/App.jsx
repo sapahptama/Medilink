@@ -16,10 +16,10 @@ import Pagar from "./pages/Pagar/Pagar.jsx";
 import PerfilPaciente from "./pages/Perfil/Perfil.jsx";
 import Agendar from "./pages/Agendar/Agendar.jsx";
 import UserProfile from "./pages/PerfilMedico/PerfilMedico.jsx";
-import SeleccionRegistro from "./pages/Pagar/SeleccionRegistro/SeleccionRegistro.jsx";
 import Ajustes from "./pages/Ajustes/Ajustes.jsx";
 import Notificaciones from "./pages/Notificaciones/Notificaciones.jsx";
 import InicioMedico from "./pages/InicioMedico/InicioMedico.jsx";
+import SeleccionRegistro from "./pages/SeleccionRegistro/SeleccionRegistro.jsx";
 function App() {
   return (
     <>
