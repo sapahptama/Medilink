@@ -9,7 +9,7 @@ import {
   FaExclamationTriangle,
   FaCamera,
 } from "react-icons/fa";
-import "./Perfil.css";
+import "./perfil.css";
 
 export default function Perfil() {
   const navigate = useNavigate();
