@@ -13,7 +13,7 @@ function Login() {
   e.preventDefault();
 
   try {
-    const response = await fetch("http://localhost:4001/usuarios/login", {
+    const response = await fetch("https://servidor-medilink.vercel.app/usuarios/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ correo: email, contrasena: password }),

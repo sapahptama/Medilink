@@ -14,6 +14,8 @@ export default function RegistroPaciente() {
     confirmarContrasena: "",
     tipoDocumento: "",
     numeroDocumento: "",
+    fechaNacimiento: "",
+    tipoSangre: "",
     eps: "",
     enfermedades: ""
   });
@@ -37,7 +39,7 @@ export default function RegistroPaciente() {
 
     setLoading(true);
     try {
-      const res = await fetch("http://localhost:4001/pacientes", {
+      const res = await fetch("https://servidor-medilink.vercel.app/pacientes", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form)
@@ -98,6 +100,22 @@ export default function RegistroPaciente() {
 
         <label>Número de documento:</label>
         <input type="text" name="numeroDocumento" onChange={handleChange} required />
+
+        <label>Fecha de nacimiento:</label>
+        <input type="date" name="fechaNacimiento" onChange={handleChange} required />
+
+        <label>Tipo de sangre:</label>
+        <select name="tipoSangre" onChange={handleChange} required>
+          <option value="">Seleccione...</option>
+          <option value="A+">A+</option>
+          <option value="A-">A-</option>
+          <option value="B+">B+</option>
+          <option value="B-">B-</option>
+          <option value="AB+">AB+</option>
+          <option value="AB-">AB-</option>
+          <option value="O+">O+</option>
+          <option value="O-">O-</option>
+        </select>
 
         <label>EPS:</label>
         <input type="text" name="eps" onChange={handleChange} required />
