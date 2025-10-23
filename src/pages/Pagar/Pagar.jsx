@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaArrowLeft, FaCreditCard, FaUniversity, FaMoneyBill, FaMobileAlt } from "react-icons/fa";
-import "./Pagar.css";
+import "./pagar.css";
 
 export default function Pagar() {
   const navigate = useNavigate();

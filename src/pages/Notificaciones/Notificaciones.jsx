@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaArrowLeft, FaBell, FaEnvelope, FaCalendarAlt, FaTimes } from "react-icons/fa";
-import "./notificaciones.css";
+import "./Notificaciones.css";
 import Menu from "../../components/menu/menu.jsx";
 
 export default function Notificaciones() {
