@@ -3,58 +3,61 @@ import { useNavigate } from "react-router-dom";
 import "./formularioRegistroMedico.css";
 import { UserContext } from "../../context/UserContext";
 
-const ESPECIALIDADES = [
-  "Medicina General", "Pediatría", "Cardiología", "Dermatología",
-  "Oftalmología", "Psiquiatría", "Neurología", "Ortopedia y Traumatología",
-  "Anestesiología", "Otorrinolaringología", "Urología", "Oncología",
-  "Endocrinología", "Gastroenterología", "Nefrología", "Neumología",
-  "Reumatología", "Medicina Interna", "Radiología", "Medicina Familiar",
-  "Infectología", "Hematología", "Medicina del Deporte", "Medicina Laboral",
-  "Medicina Física y Rehabilitación", "Geriatría", "Genética Médica",
-  "Patología", "Otros"
-];
-
-export default function FormularioRegistroMedico() {
-  const [formulario, setFormulario] = useState({
-    nombre: "",
-    apellidos: "",
-    cedula: "",
-    correo: "",
-    telefono: "",
-    direccion: "",
-    fechaNacimiento: "",
-    tipoSangre: "",
-    numeroRegistro: "",
-    rethus: "",
-    especialidad: "",
-    universidad: "",
-    experiencia: "",
-    contrasena: "",
-    confirmarContrasena: "",
-  });
-
-  const [archivos, setArchivos] = useState({
-    hojaVida: null,
-    documentoIdentidad: null,
-    diplomas: null,
-    foto: null,
-  });
-
+const FormularioRegistroMedico = () => {
   const navigate = useNavigate();
   const { setUsuario } = useContext(UserContext);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormulario((prev) => ({ ...prev, [name]: value }));
-  };
+  const [formulario, setFormulario] = useState({
+    nombre: "",
+    apellidos: "",
+    telefono: "",
+    correo: "",
+    contrasena: "",
+    confirmarContrasena: "",
+    cedula: "",
+    direccion: "",
+    fechaNacimiento: "",
+    tipoSangre: "",
+    especialidad: "",
+    experiencia: "",
+    numeroRegistro: "",
+    rethus: "",
+    universidad: "",
+  });
 
+  const [archivos, setArchivos] = useState({
+    foto: null, // única que se envía
+    documento: null,
+    diploma: null,
+    certificado: null,
+  });
+
+  // 🔹 Manejo de archivos
   const handleFileChange = (e) => {
     const { name, files } = e.target;
-    if (files && files[0]) {
-      setArchivos((prev) => ({ ...prev, [name]: files[0] }));
+    const file = files[0];
+    if (!file) return;
+
+    if (name === "foto") {
+      // convertir imagen a base64
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setArchivos((prev) => ({ ...prev, [name]: reader.result }));
+      };
+      reader.readAsDataURL(file);
+    } else {
+      // solo visual
+      setArchivos((prev) => ({ ...prev, [name]: file }));
     }
   };
 
+  // 🔹 Manejo de inputs
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormulario({ ...formulario, [name]: value });
+  };
+
+  // 🔹 Enviar datos al backend
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -63,11 +66,16 @@ export default function FormularioRegistroMedico() {
       return;
     }
 
+    const payload = {
+      ...formulario,
+      foto_perfil: archivos.foto || null, // solo la foto se guarda realmente
+    };
+
     try {
       const res = await fetch("https://servidor-medilink.vercel.app/medicos", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formulario),
+        body: JSON.stringify(payload),
       });
 
       const data = await res.json();
@@ -77,7 +85,9 @@ export default function FormularioRegistroMedico() {
         return;
       }
 
-      alert("✅ Médico registrado con éxito (archivos no se almacenan)");
+      console.log("✅ Registro exitoso:", data);
+      alert("✅ Médico registrado con éxito");
+
       setUsuario({
         nombre: formulario.nombre,
         apellido: formulario.apellidos,
@@ -85,104 +95,163 @@ export default function FormularioRegistroMedico() {
         rol: "medico",
       });
 
-      navigate("/inicio-medico");
+      setTimeout(() => {
+        console.log("➡️ Redirigiendo a /inicio-medico...");
+        navigate("/inicio-medico");
+      }, 300);
     } catch (error) {
-      console.error(error);
+      console.error("❌ Error al registrar médico:", error);
       alert("Error de conexión con el servidor");
     }
   };
 
   return (
-    <div className="formulario-container">
+    <div className="contenedor-formulario-medico">
       <h2>Registro de Médico</h2>
-      <form onSubmit={handleSubmit} className="formulario-medico">
-        <label>Nombre:</label>
-        <input type="text" name="nombre" onChange={handleChange} required />
 
-        <label>Apellidos:</label>
-        <input type="text" name="apellidos" onChange={handleChange} required />
-
-        <label>Cédula:</label>
-        <input type="text" name="cedula" onChange={handleChange} required />
-
-        <label>Correo:</label>
-        <input type="email" name="correo" onChange={handleChange} required />
-
-        <label>Teléfono:</label>
-        <input type="tel" name="telefono" onChange={handleChange} required />
-
-        <label>Dirección:</label>
-        <input type="text" name="direccion" onChange={handleChange} required />
-
-        <label>Fecha de nacimiento:</label>
-        <input type="date" name="fechaNacimiento" onChange={handleChange} required />
-
-        <label>Tipo de sangre:</label>
-        <select name="tipoSangre" onChange={handleChange} required defaultValue="">
-          <option value="" disabled>Selecciona tu tipo de sangre</option>
-          <option value="A+">A+</option>
-          <option value="A-">A-</option>
-          <option value="B+">B+</option>
-          <option value="B-">B-</option>
-          <option value="AB+">AB+</option>
-          <option value="AB-">AB-</option>
-          <option value="O+">O+</option>
-          <option value="O-">O-</option>
-        </select>
-
-        <label>Número de Registro Profesional:</label>
-        <input type="text" name="numeroRegistro" onChange={handleChange} required />
-
-        <label>RETHUS:</label>
-        <input type="text" name="rethus" onChange={handleChange} required />
-
-        <label>Especialidad:</label>
-        <select name="especialidad" onChange={handleChange} required defaultValue="">
-          <option value="" disabled>Selecciona una especialidad</option>
-          {ESPECIALIDADES.map((esp) => (
-            <option key={esp} value={esp}>{esp}</option>
-          ))}
-        </select>
-
-        <label>Universidad:</label>
-        <input type="text" name="universidad" onChange={handleChange} />
-
-        <label>Años de experiencia:</label>
-        <input type="number" name="experiencia" min="0" onChange={handleChange} />
-
-        <label>Contraseña:</label>
-        <input type="password" name="contrasena" onChange={handleChange} required />
-
-        <label>Confirmar contraseña:</label>
-        <input type="password" name="confirmarContrasena" onChange={handleChange} required />
-
-        {/* Archivos visuales */}
+      <form onSubmit={handleSubmit}>
         <div className="grupo">
-          <label>Hoja de Vida:</label>
-          <input type="file" name="hojaVida" accept=".pdf" onChange={handleFileChange} />
-          {archivos.hojaVida && <p>✅ {archivos.hojaVida.name}</p>}
+          <label>Nombre:</label>
+          <input type="text" name="nombre" onChange={handleChange} required />
         </div>
 
         <div className="grupo">
-          <label>Documento de Identidad:</label>
-          <input type="file" name="documentoIdentidad" accept=".pdf" onChange={handleFileChange} />
-          {archivos.documentoIdentidad && <p>✅ {archivos.documentoIdentidad.name}</p>}
+          <label>Apellidos:</label>
+          <input type="text" name="apellidos" onChange={handleChange} required />
         </div>
 
         <div className="grupo">
-          <label>Diplomas:</label>
-          <input type="file" name="diplomas" accept=".pdf" onChange={handleFileChange} />
-          {archivos.diplomas && <p>✅ {archivos.diplomas.name}</p>}
+          <label>Correo electrónico:</label>
+          <input type="email" name="correo" onChange={handleChange} required />
         </div>
 
         <div className="grupo">
-          <label>Foto:</label>
+          <label>Contraseña:</label>
+          <input type="password" name="contrasena" onChange={handleChange} required />
+        </div>
+
+        <div className="grupo">
+          <label>Confirmar contraseña:</label>
+          <input type="password" name="confirmarContrasena" onChange={handleChange} required />
+        </div>
+
+        {/* 🔹 Foto de perfil */}
+        <div className="grupo">
+          <label>Foto de perfil:</label>
           <input type="file" name="foto" accept="image/*" onChange={handleFileChange} />
-          {archivos.foto && <p>✅ {archivos.foto.name}</p>}
+          {archivos.foto && (
+            <img
+              src={archivos.foto}
+              alt="Previsualización"
+              style={{
+                width: 100,
+                height: 100,
+                borderRadius: "50%",
+                marginTop: 10,
+                objectFit: "cover",
+                border: "2px solid #ccc",
+              }}
+            />
+          )}
         </div>
 
-        <button type="submit" className="btn-enviar">Registrar Médico</button>
+        {/* 🔹 Archivos visuales (no se envían) */}
+        <div className="grupo">
+          <label>Documento de identidad:</label>
+          <input type="file" name="documento" onChange={handleFileChange} />
+          {archivos.documento && <p>📄 {archivos.documento.name}</p>}
+        </div>
+
+        <div className="grupo">
+          <label>Diploma:</label>
+          <input type="file" name="diploma" onChange={handleFileChange} />
+          {archivos.diploma && <p>🎓 {archivos.diploma.name}</p>}
+        </div>
+
+        <div className="grupo">
+          <label>Certificado:</label>
+          <input type="file" name="certificado" onChange={handleFileChange} />
+          {archivos.certificado && <p>📜 {archivos.certificado.name}</p>}
+        </div>
+
+        <div className="grupo">
+          <label>Cédula:</label>
+          <input type="text" name="cedula" onChange={handleChange} required />
+        </div>
+
+        <div className="grupo">
+          <label>Dirección:</label>
+          <input type="text" name="direccion" onChange={handleChange} />
+        </div>
+
+        <div className="grupo">
+          <label>Fecha de nacimiento:</label>
+          <input type="date" name="fechaNacimiento" onChange={handleChange} />
+        </div>
+
+        {/* 🔹 Select de tipo de sangre */}
+        <div className="grupo">
+          <label>Tipo de sangre:</label>
+          <select name="tipoSangre" onChange={handleChange} required>
+            <option value="">Seleccionar...</option>
+            <option value="A+">A+</option>
+            <option value="A-">A-</option>
+            <option value="B+">B+</option>
+            <option value="B-">B-</option>
+            <option value="AB+">AB+</option>
+            <option value="AB-">AB-</option>
+            <option value="O+">O+</option>
+            <option value="O-">O-</option>
+          </select>
+        </div>
+
+        {/* 🔹 Select de especialidad médica */}
+        <div className="grupo">
+          <label>Especialidad:</label>
+          <select name="especialidad" onChange={handleChange} required>
+            <option value="">Seleccionar...</option>
+            <option value="Medicina General">Medicina General</option>
+            <option value="Pediatría">Pediatría</option>
+            <option value="Cardiología">Cardiología</option>
+            <option value="Dermatología">Dermatología</option>
+            <option value="Ginecología">Ginecología</option>
+            <option value="Neurología">Neurología</option>
+            <option value="Oftalmología">Oftalmología</option>
+            <option value="Ortopedia">Ortopedia</option>
+            <option value="Psiquiatría">Psiquiatría</option>
+            <option value="Urología">Urología</option>
+            <option value="Anestesiología">Anestesiología</option>
+            <option value="Radiología">Radiología</option>
+            <option value="Cirugía">Cirugía</option>
+          </select>
+        </div>
+
+        <div className="grupo">
+          <label>Años de experiencia:</label>
+          <input type="number" name="experiencia" onChange={handleChange} />
+        </div>
+
+        <div className="grupo">
+          <label>Número de registro:</label>
+          <input type="text" name="numeroRegistro" onChange={handleChange} required />
+        </div>
+
+        <div className="grupo">
+          <label>Rethus:</label>
+          <input type="text" name="rethus" onChange={handleChange} />
+        </div>
+
+        <div className="grupo">
+          <label>Universidad:</label>
+          <input type="text" name="universidad" onChange={handleChange} />
+        </div>
+
+        <button type="submit" className="btn-enviar">
+          Registrar Médico
+        </button>
       </form>
     </div>
   );
-}
+};
+
+export default FormularioRegistroMedico;

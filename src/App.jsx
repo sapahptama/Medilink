@@ -20,6 +20,8 @@ import Ajustes from "./pages/Ajustes/Ajustes.jsx";
 import Notificaciones from "./pages/Notificaciones/Notificaciones.jsx";
 import InicioMedico from "./pages/InicioMedico/InicioMedico.jsx";
 import SeleccionRegistro from "./pages/SeleccionRegistro/SeleccionRegistro.jsx";
+import ConfigDates from "./pages/ConfigDates/ConfigDates.jsx";
+import DisponibilidadMedico from "./pages/DisponibilidadMedico/DisponibilidadMedico.jsx";
 function App() {
   return (
     <>
@@ -70,6 +72,8 @@ function App() {
           <Route path="/seleccionar-medico" element={<SelectedDoctor />} />
           <Route path="/perfilmedico" element={<UserProfile />} />
           <Route path="/citas-del-usuario" element={<CitasList />} />
+          <Route path="/mis-horarios" element={<ConfigDates />} />
+          <Route path="/disponibilidad/:idMedico" element={<DisponibilidadMedico />} />
           {/* Fin Yenifer */}
           {/* Yidis  */}
           <Route path="/registro-medico" element={<FormularioRegistroMedico />} />

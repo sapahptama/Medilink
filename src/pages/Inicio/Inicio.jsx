@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import { Search, Bell, Calendar, User, Activity, FileText, Clock, MapPin, Phone, Mail, ChevronRight, Heart, Pill, Stethoscope, ClipboardList, MessageCircle, Home } from 'lucide-react';
 import './Inicio.css';
+//importar navigate
+import { useNavigate } from 'react-router-dom';
 
 function Inicio() {
   const [searchTerm, setSearchTerm] = useState('');
   const [activeTab, setActiveTab] = useState('inicio');
-  
+  const navigate = useNavigate();
+
   // 🔗 FUNCIONES DE NAVEGACIÓN - Agrega aquí tus redirecciones
   const navigateTo = {
     buscar: () => {
@@ -34,8 +37,7 @@ function Inicio() {
       // navigate('/inicio');
     },
     agendarCita: () => {
-      console.log('Navegar a agendar cita');
-      // navigate('/agendar-cita');
+      navigate('/seleccionar-medico')
     },
     misCitas: () => {
       console.log('Navegar a mis citas');

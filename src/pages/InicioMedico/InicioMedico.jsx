@@ -18,10 +18,12 @@ import {
 } from "lucide-react";
 import "./InicioMedico.css";
 import { UserContext } from "../../context/UserContext";
+import { useNavigate } from "react-router-dom"; // ✅ Importar navegación
 
 function InicioMedico() {
   const [activeTab, setActiveTab] = useState("inicio");
   const { usuario } = useContext(UserContext);
+  const navigate = useNavigate(); // ✅ Hook de navegación
 
   const navigateTo = {
     inicio: () => setActiveTab("inicio"),
@@ -31,6 +33,7 @@ function InicioMedico() {
     mensajes: () => setActiveTab("mensajes"),
     notificaciones: () => setActiveTab("notificaciones"),
     perfil: () => setActiveTab("perfil"),
+    horarios: () => navigate("/mis-horarios"), // ✅ Redirección a /mis-horarios
   };
 
   return (
@@ -74,9 +77,6 @@ function InicioMedico() {
           <h2 className="welcome-title">
             ¡Hola, Dr. {usuario?.nombre || "Médico"}! 👋
           </h2>
-          <p className="welcome-subtitle">
-            Aquí tienes tu panel de control médico
-          </p>
         </section>
 
         {/* ACCIONES RÁPIDAS */}
@@ -95,6 +95,15 @@ function InicioMedico() {
             </div>
             <h3 className="action-title">Mis Citas</h3>
             <p className="action-subtitle">Hoy y próximas</p>
+          </button>
+
+          {/* ✅ NUEVO BOTÓN: MIS HORARIOS */}
+          <button onClick={navigateTo.horarios} className="action-card">
+            <div className="action-icon teal">
+              <Clock className="icon" />
+            </div>
+            <h3 className="action-title">Mis Horarios</h3>
+            <p className="action-subtitle">Gestiona tu disponibilidad</p>
           </button>
 
           <button onClick={navigateTo.historial} className="action-card">
