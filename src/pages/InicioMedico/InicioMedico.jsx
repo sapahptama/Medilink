@@ -19,6 +19,7 @@ import {
 import "./InicioMedico.css";
 import { UserContext } from "../../context/UserContext";
 import { useNavigate } from "react-router-dom"; // ✅ Importar navegación
+import ProximaCita from "../../components/ProximaCita/ProximaCita";
 
 function InicioMedico() {
   const [activeTab, setActiveTab] = useState("inicio");
@@ -27,8 +28,8 @@ function InicioMedico() {
 
   const navigateTo = {
     inicio: () => setActiveTab("inicio"),
-    pacientes: () => setActiveTab("pacientes"),
-    citas: () => setActiveTab("citas"),
+    pacientes: () => navigate("/mis-pacientes"),
+    citas: () => navigate("/mis-citas"),
     historial: () => setActiveTab("historial"),
     mensajes: () => setActiveTab("mensajes"),
     notificaciones: () => setActiveTab("notificaciones"),
@@ -126,29 +127,7 @@ function InicioMedico() {
         {/* CONTENIDO PRINCIPAL */}
         <div className="content-grid">
           <div className="left-column">
-            {/* PRÓXIMAS CITAS */}
-            <div className="next-appointment-card">
-              <div className="appointment-header">
-                <div className="appointment-info">
-                  <p className="appointment-label">Próxima consulta</p>
-                  <h3 className="appointment-time">Lunes, 9:00 AM</h3>
-                  <p className="appointment-doctor">
-                    <User className="inline-icon" /> Paciente: Ana Torres
-                  </p>
-                  <p className="appointment-location">
-                    <MapPin className="inline-icon" /> Consultorio 302
-                  </p>
-                </div>
-                <div className="appointment-icon-wrapper">
-                  <Calendar className="appointment-icon" />
-                </div>
-              </div>
-              <div className="appointment-actions">
-                <button className="btn-primary">Ver detalles</button>
-                <button className="btn-secondary">Reprogramar</button>
-              </div>
-            </div>
-
+            <ProximaCita />
             {/* PACIENTES DESTACADOS */}
             <div className="favorites-card">
               <h3 className="card-title">

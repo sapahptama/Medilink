@@ -3,6 +3,7 @@ import { Search, Bell, Calendar, User, Activity, FileText, Clock, MapPin, Phone,
 import './Inicio.css';
 //importar navigate
 import { useNavigate } from 'react-router-dom';
+import ProximaCita from '../../components/ProximaCita/ProximaCita';
 
 function Inicio() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -31,17 +32,12 @@ function Inicio() {
       setActiveTab('mensajes');
       // navigate('/mensajes');
     },
-    inicio: () => {
-      console.log('Navegar a inicio');
-      setActiveTab('inicio');
-      // navigate('/inicio');
-    },
     agendarCita: () => {
       navigate('/seleccionar-medico')
     },
     misCitas: () => {
       console.log('Navegar a mis citas');
-      // navigate('/mis-citas');
+      navigate('/mis-citas');
     },
     historialMedico: () => {
       console.log('Navegar a historial médico');
@@ -178,37 +174,7 @@ function Inicio() {
           {/* COLUMNA IZQUIERDA */}
           <div className="left-column">
             {/* PRÓXIMA CITA */}
-            <div className="next-appointment-card">
-              <div className="appointment-header">
-                <div className="appointment-info">
-                  <p className="appointment-label">Próxima cita</p>
-                  <h3 className="appointment-time">Lunes, 10:00 AM</h3>
-                  <p className="appointment-doctor">
-                    <Stethoscope className="inline-icon" />
-                    Dra. Ana López - Cardiología
-                  </p>
-                  <p className="appointment-location">
-                    <MapPin className="inline-icon" />
-                    Clínica Norte - Consultorio 302
-                  </p>
-                </div>
-                <div className="appointment-icon-wrapper">
-                  <Calendar className="appointment-icon" />
-                </div>
-              </div>
-              <div className="appointment-actions">
-                <button 
-                  onClick={() => navigateTo.verDetalleCita('cita-123')}
-                  className="btn-primary"
-                >
-                  Ver detalles
-                </button>
-                <button className="btn-secondary">
-                  Re-agendar
-                </button>
-              </div>
-            </div>
-
+            <ProximaCita />
             {/* CLÍNICAS Y DOCTORES FAVORITOS */}
             <div className="favorites-card">
               <h3 className="card-title">

@@ -22,6 +22,8 @@ import InicioMedico from "./pages/InicioMedico/InicioMedico.jsx";
 import SeleccionRegistro from "./pages/SeleccionRegistro/SeleccionRegistro.jsx";
 import ConfigDates from "./pages/ConfigDates/ConfigDates.jsx";
 import DisponibilidadMedico from "./pages/DisponibilidadMedico/DisponibilidadMedico.jsx";
+import MisCitas from "./pages/MisCitas/MisCitas.jsx";
+import MisPacientes from "./pages/MisPacientes/MisPacientes.jsx";
 function App() {
   return (
     <>
@@ -74,6 +76,8 @@ function App() {
           <Route path="/citas-del-usuario" element={<CitasList />} />
           <Route path="/mis-horarios" element={<ConfigDates />} />
           <Route path="/disponibilidad/:idMedico" element={<DisponibilidadMedico />} />
+          <Route path="/mis-citas" element={<MisCitas />} />
+          <Route path="/mis-pacientes" element={<MisPacientes />} />
           {/* Fin Yenifer */}
           {/* Yidis  */}
           <Route path="/registro-medico" element={<FormularioRegistroMedico />} />

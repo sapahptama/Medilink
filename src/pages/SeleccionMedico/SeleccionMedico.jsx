@@ -1,7 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "./SeleccionMedico.css";
-import { MapPin, Stethoscope, ChevronRight, AlertCircle, Loader } from "lucide-react";
+import {
+  MapPin,
+  Stethoscope,
+  ChevronRight,
+  AlertCircle,
+  Loader,
+  ArrowLeftCircle,
+  Users,
+} from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../context/UserContext";
 
 const API_MEDICOS = "https://servidor-medilink.vercel.app/medicos";
 
@@ -10,9 +19,9 @@ export default function SeleccionMedico() {
   const [cargando, setCargando] = useState(false);
   const [error, setError] = useState("");
   const [filtroEspecialidad, setFiltroEspecialidad] = useState("");
+  const { usuario } = useContext(UserContext);
   const navigate = useNavigate();
 
-  // 🔹 Cargar médicos al montar el componente
   useEffect(() => {
     cargarMedicos();
   }, []);
@@ -24,14 +33,14 @@ export default function SeleccionMedico() {
       if (!response.ok) throw new Error("Error al cargar médicos");
       const data = await response.json();
 
-      // ✅ Si el médico no tiene foto, generar avatar automático
       const medicosConFoto = data.map((m) => ({
         ...m,
         foto_perfil:
-          m.foto_perfil ||
-          `https://ui-avatars.com/api/?name=${encodeURIComponent(
-            `${m.nombre} ${m.apellido}`
-          )}&background=0d9488&color=fff&size=200`,
+          m.foto_perfil && m.foto_perfil.trim() !== ""
+            ? m.foto_perfil
+            : `https://ui-avatars.com/api/?name=${encodeURIComponent(
+                `${m.nombre} ${m.apellido}`
+              )}&background=0d9488&color=fff&size=200`,
       }));
 
       setMedicos(medicosConFoto);
@@ -44,17 +53,25 @@ export default function SeleccionMedico() {
     }
   };
 
-  // 🔹 Obtener especialidades únicas
+  const volverInicio = () => {
+    if (!usuario) return navigate("/");
+    if (usuario.rol === "medico") navigate("/inicio-medico");
+    else if (usuario.rol === "paciente") navigate("/inicio-paciente");
+    else navigate("/");
+  };
+
+  const handleSeleccionarMedico = (medico) => {
+    navigate(`/disponibilidad/${medico.id_medico}`);
+  };
+
   const especialidades = [
     ...new Set(medicos.map((m) => m.especialidad).filter(Boolean)),
   ];
 
-  // 🔹 Filtrar médicos según especialidad
   const medicosFiltrados = filtroEspecialidad
     ? medicos.filter((m) => m.especialidad === filtroEspecialidad)
     : medicos;
 
-  // 🔹 Estado: cargando
   if (cargando) {
     return (
       <div className="lista-medicos-container">
@@ -66,12 +83,6 @@ export default function SeleccionMedico() {
     );
   }
 
-  const handleSeleccionarMedico = (medico) => {
-    // Redirigir a DisponibilidadMedico con el ID del médico
-    navigate(`/disponibilidad/${medico.id_medico}`);
-  };
-
-  // 🔹 Estado: error
   if (error) {
     return (
       <div className="lista-medicos-container">
@@ -86,20 +97,23 @@ export default function SeleccionMedico() {
     );
   }
 
-  // 🔹 Render principal
   return (
     <div className="lista-medicos-container">
-      <header className="header-medicos">
+      <div className="header-flex">
+        <button className="btn-volver" onClick={volverInicio}>
+          <ArrowLeftCircle size={22} /> Volver
+        </button>
         <div className="header-titulo">
           <Stethoscope size={28} />
           <h1>Nuestros Médicos</h1>
         </div>
-        <p className="header-subtitulo">
-          Selecciona un médico para ver su disponibilidad
-        </p>
-      </header>
+      </div>
 
-      {/* 🔸 Filtro de especialidad */}
+      <p className="header-subtitulo">
+        Selecciona un médico para ver su disponibilidad
+      </p>
+
+      {/* Filtro de especialidad */}
       <div className="filtro-container">
         <button
           className={`filtro-btn ${!filtroEspecialidad ? "activo" : ""}`}
@@ -123,25 +137,37 @@ export default function SeleccionMedico() {
         })}
       </div>
 
-      {/* 🔸 Grid de médicos */}
-      <div className="grid-medicos">
-        {medicosFiltrados.length === 0 ? (
-          <div className="sin-resultados">
-            <p>No hay médicos con esa especialidad</p>
-          </div>
-        ) : (
-          medicosFiltrados.map((medico) => (
+      {/* Lista o mensaje vacío */}
+      {medicosFiltrados.length === 0 ? (
+        <div className="no-medicos">
+          <Users size={64} className="no-medicos-icon" />
+          <h3>No se encontraron médicos disponibles</h3>
+          <p>
+            {filtroEspecialidad
+              ? "No hay médicos registrados en esta especialidad."
+              : "Aún no hay médicos registrados en el sistema."}
+          </p>
+          <button onClick={volverInicio} className="btn-volver-inicio">
+            <ArrowLeftCircle size={20} /> Volver al inicio
+          </button>
+        </div>
+      ) : (
+        <div className="grid-medicos">
+          {medicosFiltrados.map((medico) => (
             <div key={medico.id_medico} className="tarjeta-medico">
-              {/* FOTO */}
               <div className="medico-foto-container">
                 <img
                   src={medico.foto_perfil}
                   alt={`${medico.nombre} ${medico.apellido}`}
                   className="medico-foto"
+                  onError={(e) => {
+                    e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(
+                      `${medico.nombre} ${medico.apellido}`
+                    )}&background=0d9488&color=fff&size=200`;
+                  }}
                 />
               </div>
 
-              {/* INFO */}
               <div className="medico-info">
                 <h3 className="medico-nombre">
                   {medico.nombre} {medico.apellido}
@@ -176,26 +202,18 @@ export default function SeleccionMedico() {
                 )}
               </div>
 
-              {/* ACCIONES */}
               <div className="medico-acciones">
                 <button
-                  className="btn-accion btn-chat"
-                  title="Chatear con el médico"
-                >
-                  💬 Chat
-                </button>
-                <button
                   className="btn-accion btn-cita"
-                  onClick={() => handleSeleccionarMedico(medico)} 
+                  onClick={() => handleSeleccionarMedico(medico)}
                 >
-                  Pedir Cita
-                  <ChevronRight size={18} />
+                  Pedir Cita <ChevronRight size={18} />
                 </button>
               </div>
             </div>
-          ))
-        )}
-      </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
