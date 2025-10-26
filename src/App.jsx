@@ -11,7 +11,7 @@ import SelectedDoctor from "./pages/SeleccionMedico/SeleccionMedico.jsx";
 import FormularioRegistroMedico from "./pages/FormularioRegistroMedico/formularioRegistroMedico.jsx";
 import VistaMedico from "./pages/VistaDetalladaMedico/vistamedico.jsx";
 import VistaPrincipalMedico from "./pages/VistaPrincipalMedico/vistaprincipalmedico.jsx";
-import HistorialMedico from "./pages/HistorialMedico/historialmedico.jsx";
+import HistorialMedico from "./pages/HistorialMedico/HistorialMedico.jsx";
 import Pagar from "./pages/Pagar/Pagar.jsx";
 import PerfilPaciente from "./pages/Perfil/Perfil.jsx";
 import Agendar from "./pages/Agendar/Agendar.jsx";
@@ -83,7 +83,7 @@ function App() {
           <Route path="/registro-medico" element={<FormularioRegistroMedico />} />
           <Route path="/vistamedico" element={<VistaMedico />} />
           <Route path="/vistaprincipalmedico" element={<VistaPrincipalMedico />} />
-          <Route path="/historialmedico" element={<HistorialMedico />} />
+          <Route path="/historial-medico" element={<HistorialMedico />} />
           {/* Fin Yidis */}
           {/* Camilo */}
           <Route path="/pagar" element={<Pagar />} />

@@ -11,13 +11,17 @@ import {
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import "./MisCitas.css";
+import ModalNotaMedica from "../../components/ModalNotaMedica";
 
 const API_URL = "https://servidor-medilink.vercel.app/citas";
+const REGISTROS_API = "https://servidor-medilink.vercel.app/registros";
 
 export default function MisCitas() {
   const { usuario } = useContext(UserContext);
   const [citas, setCitas] = useState([]);
   const [cargando, setCargando] = useState(true);
+  const [notaSeleccionada, setNotaSeleccionada] = useState(null);
+  const [modalAbierto, setModalAbierto] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -68,6 +72,33 @@ export default function MisCitas() {
     return "proxima";
   };
 
+  const abrirNota = async (cita) => {
+    if (usuario.rol === "medico") {
+      setNotaSeleccionada(cita);
+      setModalAbierto(true);
+    } else {
+      // paciente: ver nota médica existente
+      try {
+        const res = await fetch(`${REGISTROS_API}/cita/${cita.id}`);
+        const data = await res.json();
+
+        if (data && data.notas) {
+          alert(`🩺 Nota médica:\n\n${data.notas}`);
+        } else {
+          alert("Aún no hay nota médica registrada para esta cita.");
+        }
+      } catch (err) {
+        console.error("Error al obtener nota médica:", err);
+      }
+    }
+  };
+
+  const cerrarModal = (recargar) => {
+    setModalAbierto(false);
+    setNotaSeleccionada(null);
+    if (recargar) cargarCitas();
+  };
+
   if (cargando) return <p className="loading">Cargando tus citas...</p>;
   if (!usuario)
     return <p className="empty">Inicia sesión para ver tus citas.</p>;
@@ -97,7 +128,6 @@ export default function MisCitas() {
         <div className="citas-grid">
           {citas.map((cita) => {
             const estado = obtenerEstadoCita(cita.fecha);
-
             return (
               <div key={cita.id} className={`cita-card ${estado}`}>
                 <div className="cita-info">
@@ -126,7 +156,10 @@ export default function MisCitas() {
                 </div>
 
                 {estado === "pasada" ? (
-                  <button className="btn-nota">
+                  <button
+                    className="btn-nota"
+                    onClick={() => abrirNota(cita)}
+                  >
                     <FileText size={16} /> Nota Médica
                   </button>
                 ) : estado === "en-curso" ? (
@@ -147,6 +180,15 @@ export default function MisCitas() {
             );
           })}
         </div>
+      )}
+
+      {/* 🩺 Modal Nota Médica */}
+      {modalAbierto && notaSeleccionada && (
+        <ModalNotaMedica
+          cita={notaSeleccionada}
+          usuario={usuario}
+          onClose={cerrarModal}
+        />
       )}
     </div>
   );

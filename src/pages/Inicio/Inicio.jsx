@@ -1,54 +1,78 @@
-import React, { useState } from 'react';
-import { Search, Bell, Calendar, User, Activity, FileText, Clock, MapPin, Phone, Mail, ChevronRight, Heart, Pill, Stethoscope, ClipboardList, MessageCircle, Home } from 'lucide-react';
-import './Inicio.css';
+import React, { useState } from "react";
+import {
+  Search,
+  Bell,
+  Calendar,
+  User,
+  Activity,
+  FileText,
+  Clock,
+  MapPin,
+  Phone,
+  Mail,
+  ChevronRight,
+  Heart,
+  Pill,
+  Stethoscope,
+  ClipboardList,
+  MessageCircle,
+  Home,
+} from "lucide-react";
+import "./Inicio.css";
 //importar navigate
-import { useNavigate } from 'react-router-dom';
-import ProximaCita from '../../components/ProximaCita/ProximaCita';
+import { useNavigate } from "react-router-dom";
+import ProximaCita from "../../components/ProximaCita/ProximaCita";
+import { useContext } from "react";
+import { UserContext } from "../../context/UserContext";
 
 function Inicio() {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [activeTab, setActiveTab] = useState('inicio');
+  const { usuario } = useContext(UserContext);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [activeTab, setActiveTab] = useState("inicio");
   const navigate = useNavigate();
 
   // 🔗 FUNCIONES DE NAVEGACIÓN - Agrega aquí tus redirecciones
   const navigateTo = {
     buscar: () => {
-      console.log('Navegar a búsqueda avanzada');
+      console.log("Navegar a búsqueda avanzada");
       // Ejemplo: window.location.href = '/buscar';
       // O con React Router: navigate('/buscar');
     },
     notificaciones: () => {
-      console.log('Navegar a notificaciones');
-      setActiveTab('notificaciones');
+      console.log("Navegar a notificaciones");
+      setActiveTab("notificaciones");
       // navigate('/notificaciones');
     },
     perfil: () => {
-      console.log('Navegar a perfil completo');
-      setActiveTab('perfil');
+      console.log("Navegar a perfil completo");
+      setActiveTab("perfil");
       // navigate('/perfil');
     },
     mensajes: () => {
-      console.log('Navegar a mensajes');
-      setActiveTab('mensajes');
+      console.log("Navegar a mensajes");
+      setActiveTab("mensajes");
       // navigate('/mensajes');
     },
     agendarCita: () => {
-      navigate('/seleccionar-medico')
+      navigate("/seleccionar-medico");
     },
     misCitas: () => {
-      console.log('Navegar a mis citas');
-      navigate('/mis-citas');
+      console.log("Navegar a mis citas");
+      navigate("/mis-citas");
     },
     historialMedico: () => {
-      console.log('Navegar a historial médico');
-      // navigate('/historial-medico');
+      if (!usuario?.id_paciente) {
+        console.warn("No se encontró el ID del paciente.");
+        return;
+      }
+      navigate(`/historial-medico?id=${usuario.id_paciente}`);
     },
     recetas: () => {
-      console.log('Navegar a recetas');
+      console.log("Navegar a recetas");
       // navigate('/recetas');
     },
     resultados: () => {
-      console.log('Navegar a resultados de laboratorio');
+      console.log("Navegar a resultados de laboratorio");
       // navigate('/resultados-lab');
     },
     clinica: (clinicaId) => {
@@ -62,7 +86,7 @@ function Inicio() {
     verDetalleCita: (citaId) => {
       console.log(`Ver detalle de cita: ${citaId}`);
       // navigate(`/cita/${citaId}`);
-    }
+    },
   };
 
   return (
@@ -76,9 +100,9 @@ function Inicio() {
             </div>
             <h1 className="logo-text">MediLink</h1>
           </div>
-          
+
           <div className="header-right">
-            <button 
+            <button
               onClick={navigateTo.notificaciones}
               className="header-icon-btn"
               aria-label="Notificaciones"
@@ -86,8 +110,8 @@ function Inicio() {
               <Bell className="header-icon" />
               <span className="notification-badge"></span>
             </button>
-            
-            <button 
+
+            <button
               onClick={navigateTo.perfil}
               className="header-profile-btn"
               aria-label="Perfil"
@@ -105,7 +129,7 @@ function Inicio() {
         <div className="welcome-section">
           <h2 className="welcome-title">¡Hola, María! 👋</h2>
           <p className="welcome-subtitle">¿Cómo podemos ayudarte hoy?</p>
-          
+
           <div className="search-container">
             <Search className="search-icon" />
             <input
@@ -115,20 +139,14 @@ function Inicio() {
               onChange={(e) => setSearchTerm(e.target.value)}
               className="search-input"
             />
-            <button 
-              onClick={navigateTo.buscar}
-              className="search-button"
-            >
+            <button onClick={navigateTo.buscar} className="search-button">
               Buscar
             </button>
           </div>
         </div>
         {/* ACCIONES RÁPIDAS */}
         <div className="quick-actions">
-          <button 
-            onClick={navigateTo.agendarCita}
-            className="action-card"
-          >
+          <button onClick={navigateTo.agendarCita} className="action-card">
             <div className="action-icon teal">
               <Calendar className="icon" />
             </div>
@@ -136,10 +154,7 @@ function Inicio() {
             <p className="action-subtitle">Nueva consulta</p>
           </button>
 
-          <button 
-            onClick={navigateTo.misCitas}
-            className="action-card"
-          >
+          <button onClick={navigateTo.misCitas} className="action-card">
             <div className="action-icon blue">
               <ClipboardList className="icon" />
             </div>
@@ -147,10 +162,7 @@ function Inicio() {
             <p className="action-subtitle">Ver programadas</p>
           </button>
 
-          <button 
-            onClick={navigateTo.historialMedico}
-            className="action-card"
-          >
+          <button onClick={navigateTo.historialMedico} className="action-card">
             <div className="action-icon purple">
               <FileText className="icon" />
             </div>
@@ -158,10 +170,7 @@ function Inicio() {
             <p className="action-subtitle">Médico</p>
           </button>
 
-          <button 
-            onClick={navigateTo.recetas}
-            className="action-card"
-          >
+          <button onClick={navigateTo.recetas} className="action-card">
             <div className="action-icon amber">
               <Pill className="icon" />
             </div>
@@ -181,10 +190,10 @@ function Inicio() {
                 <Heart className="title-icon red" />
                 Favoritos
               </h3>
-              
+
               <div className="favorites-list">
-                <button 
-                  onClick={() => navigateTo.clinica('clinica-norte')}
+                <button
+                  onClick={() => navigateTo.clinica("clinica-norte")}
                   className="favorite-item"
                 >
                   <div className="favorite-icon teal">
@@ -192,13 +201,15 @@ function Inicio() {
                   </div>
                   <div className="favorite-info">
                     <h4 className="favorite-name">Clínica Norte</h4>
-                    <p className="favorite-description">Medicina General • Especialidades</p>
+                    <p className="favorite-description">
+                      Medicina General • Especialidades
+                    </p>
                   </div>
                   <ChevronRight className="chevron-icon" />
                 </button>
 
-                <button 
-                  onClick={() => navigateTo.doctor('dr-martinez')}
+                <button
+                  onClick={() => navigateTo.doctor("dr-martinez")}
                   className="favorite-item"
                 >
                   <div className="favorite-avatar blue">
@@ -211,8 +222,8 @@ function Inicio() {
                   <ChevronRight className="chevron-icon" />
                 </button>
 
-                <button 
-                  onClick={() => navigateTo.doctor('dra-lopez')}
+                <button
+                  onClick={() => navigateTo.doctor("dra-lopez")}
                   className="favorite-item"
                 >
                   <div className="favorite-avatar purple">
@@ -236,22 +247,22 @@ function Inicio() {
                 <Clock className="title-icon amber" />
                 Recordatorios
               </h3>
-              
+
               <div className="reminders-list">
                 <div className="reminder-item amber">
                   <p className="reminder-title">Chequeo anual</p>
                   <p className="reminder-text">Programa tu examen general</p>
                 </div>
-                
+
                 <div className="reminder-item blue">
                   <p className="reminder-title">Vacunación</p>
                   <p className="reminder-text">Refuerzo disponible</p>
                 </div>
-                
+
                 <div className="reminder-item green">
                   <p className="reminder-title">Resultados listos</p>
                   <p className="reminder-text">2 análisis disponibles</p>
-                  <button 
+                  <button
                     onClick={navigateTo.resultados}
                     className="reminder-link"
                   >
@@ -264,12 +275,9 @@ function Inicio() {
             {/* CONTACTO RÁPIDO */}
             <div className="contact-card">
               <h3 className="card-title">Contacto</h3>
-              
+
               <div className="contact-list">
-                <a 
-                  href="tel:+573001234567" 
-                  className="contact-item"
-                >
+                <a href="tel:+573001234567" className="contact-item">
                   <div className="contact-icon teal">
                     <Phone className="icon" />
                   </div>
@@ -278,11 +286,8 @@ function Inicio() {
                     <p className="contact-value">Línea de atención</p>
                   </div>
                 </a>
-                
-                <a 
-                  href="mailto:soporte@medilink.com" 
-                  className="contact-item"
-                >
+
+                <a href="mailto:soporte@medilink.com" className="contact-item">
                   <div className="contact-icon blue">
                     <Mail className="icon" />
                   </div>
@@ -297,9 +302,11 @@ function Inicio() {
             {/* NUEVA CLÍNICA */}
             <div className="promo-card">
               <h3 className="promo-title">🎉 Nueva Clínica</h3>
-              <p className="promo-text">Clínica Vida ahora disponible cerca de ti</p>
-              <button 
-                onClick={() => navigateTo.clinica('clinica-vida')}
+              <p className="promo-text">
+                Clínica Vida ahora disponible cerca de ti
+              </p>
+              <button
+                onClick={() => navigateTo.clinica("clinica-vida")}
                 className="promo-button"
               >
                 Conocer más
@@ -311,35 +318,37 @@ function Inicio() {
 
       {/* BARRA DE NAVEGACIÓN INFERIOR */}
       <nav className="bottom-navigation">
-        <button 
+        <button
           onClick={navigateTo.inicio}
-          className={`nav-item ${activeTab === 'inicio' ? 'active' : ''}`}
+          className={`nav-item ${activeTab === "inicio" ? "active" : ""}`}
         >
           <Home className="nav-icon" />
           <span className="nav-label">Inicio</span>
         </button>
 
-        <button 
+        <button
           onClick={navigateTo.mensajes}
-          className={`nav-item ${activeTab === 'mensajes' ? 'active' : ''}`}
+          className={`nav-item ${activeTab === "mensajes" ? "active" : ""}`}
         >
           <MessageCircle className="nav-icon" />
           <span className="nav-label">Mensajes</span>
           <span className="nav-badge">3</span>
         </button>
 
-        <button 
+        <button
           onClick={navigateTo.notificaciones}
-          className={`nav-item ${activeTab === 'notificaciones' ? 'active' : ''}`}
+          className={`nav-item ${
+            activeTab === "notificaciones" ? "active" : ""
+          }`}
         >
           <Bell className="nav-icon" />
           <span className="nav-label">Notificaciones</span>
           <span className="nav-badge">5</span>
         </button>
 
-        <button 
+        <button
           onClick={navigateTo.perfil}
-          className={`nav-item ${activeTab === 'perfil' ? 'active' : ''}`}
+          className={`nav-item ${activeTab === "perfil" ? "active" : ""}`}
         >
           <User className="nav-icon" />
           <span className="nav-label">Perfil</span>

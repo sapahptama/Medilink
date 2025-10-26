@@ -44,6 +44,10 @@ export default function MisPacientes() {
     navigate("/inicio-medico");
   };
 
+  const verHistorial = (idPaciente) => {
+    navigate(`/historial-medico?id=${idPaciente}`);
+  };
+
   if (cargando) return <p className="loading">Cargando pacientes...</p>;
 
   if (!pacientes.length)
@@ -98,17 +102,12 @@ export default function MisPacientes() {
               >
                 <MessageCircle size={16} /> Chat
               </button>
+
               <button
                 className="btn-historial"
-                onClick={() => alert(`Historial de ${p.nombre}`)}
+                onClick={() => verHistorial(p.id_paciente)}
               >
                 <FileText size={16} /> Historial
-              </button>
-              <button
-                className="btn-notas"
-                onClick={() => alert(`Notas médicas de ${p.nombre}`)}
-              >
-                <ClipboardList size={16} /> Notas
               </button>
             </div>
           </div>

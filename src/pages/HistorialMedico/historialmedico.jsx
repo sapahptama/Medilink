@@ -1,208 +1,92 @@
-import React, { useState } from "react";
-import "./historialmedico.css";
-import { IoIosArrowRoundBack } from "react-icons/io";
-import { FiSearch } from "react-icons/fi";
+import React, { useEffect, useState, useContext } from "react";
+import { useSearchParams, useNavigate } from "react-router-dom";
+import { UserContext } from "../../context/UserContext";
+import { ArrowLeftCircle, FileText, User } from "lucide-react";
+import "./HistorialMedico.css";
 
-export default function Historialmedico() {
-  const [pacientes] = useState([
-    {
-      id: 1,
-      nombre: "Ana",
-      apellidos: "Gómez",
-      genero: "Femenino",
-      fechaNacimiento: "1997-06-15",
-      edad: 28,
-      direccion: "Cra 10 # 23-45, Medellín",
-      telefono: "3001234567",
-      contactoEmergencia: "Laura Gómez - 3012233445",
-      ocupacion: "Ingeniera de Sistemas",
-      enfermedad: "Asma",
-      medicamentosActuales: ["Salbutamol (inhalador)", "Montelukast 10mg/día"],
-      antecedentesFamiliares: "Madre hipertensa, padre diabético",
-      alergias: "Penicilina",
-      evolucionClinica: "Ha mejorado con el uso regular del inhalador.",
-      historial: [
-        { fecha: "2025-01-10", descripcion: "Consulta general" },
-        { fecha: "2025-03-05", descripcion: "Vacuna antitetánica" }
-      ]
-    },
-    {
-      id: 2,
-      nombre: "Luis",
-      apellidos: "Martínez",
-      genero: "Masculino",
-      fechaNacimiento: "1990-11-22",
-      edad: 26,
-      direccion: "Cl 45 # 12-67, cali",
-      telefono: "3109876543",
-      contactoEmergencia: "Carlos Martínez - 3125566778",
-      ocupacion: "Profesor",
-      enfermedad: "Hipertensión",
-      medicamentosActuales: ["Losartán 50mg cada 12h"],
-      antecedentesFamiliares: "Abuelo con enfermedad cardíaca",
-      alergias: "Ninguna conocida",
-      evolucionClinica: "Presión arterial controlada con medicación.",
-      historial: [{ fecha: "2025-02-20", descripcion: "Examen de sangre" }]
-    },
-     {
-      id: 3,
-      nombre: "matias ",
-      apellidos: "londoño",
-      genero: "Masculino",
-      fechaNacimiento: "2007-11-12",
-      edad: 17,
-      direccion: "Cl 39 # 12-67, medellín",
-      telefono: "3109876543",
-      contactoEmergencia: "luisa perea - 3135505778",
-      ocupacion: "empresario",
-      enfermedad: "Hipertensión",
-      medicamentosActuales: ["Losartán 50mg cada 12h"],
-      antecedentesFamiliares: "mama con enfermedad cardíaca",
-      alergias: "miel",
-      evolucionClinica: "Presión arterial controlada con medicación.",
-      historial: [{ fecha: "2025-04-22", descripcion: "Examen de sangre" }]
-    },
-     {
-      id: 4,
-      nombre: "taliana",
-      apellidos: "mosquera",
-      genero: "Femenino",
-      fechaNacimiento: "1990-11-22",
-      edad: 35,
-      direccion: "Cl 44 # 16-64, Bogotá",
-      telefono: "3109876543",
-      contactoEmergencia: "Carlos Martínez - 3125669778",
-      ocupacion: "bombero",
-      enfermedad: "diabetes",
-      medicamentosActuales: ["Losartán 50mg cada 12h"],
-      antecedentesFamiliares: "Abuelo con enfermedad cardíaca",
-      alergias: "Ninguna conocida",
-      evolucionClinica: "nivel regular  de glucosa.",
-      historial: [{ fecha: "2025-07-27", descripcion: "Examen de sangre" }]
-    },
-      {
-      id: 5,
-      nombre: "yeison",
-      apellidos: "mosquera",
-      genero: "masculino",
-      fechaNacimiento: "1990-11-22",
-      edad: 21,
-      direccion: "Cl 44 # 16-64, Bogotá",
-      telefono: "3109876543",
-      contactoEmergencia: "Carlos Martínez - 3125669778",
-      ocupacion: "profesor",
-      enfermedad: "lupus",
-      medicamentosActuales: ["Losartán 50mg cada 12h"],
-      antecedentesFamiliares: "mamá con enfermedad cardíaca",
-      alergias: "Ninguna conocida",
-      evolucionClinica: "en tratamiento.",
-      historial: [{ fecha: "2025-07-27", descripcion: "Examen de sangre" }]
-    }
-    
-  ]);
+const API_URL = "https://servidor-medilink.vercel.app/registros";
 
-  const [pacienteSeleccionado, setPacienteSeleccionado] = useState(null);
-  const [busqueda, setBusqueda] = useState("");
+export default function HistorialMedico() {
+  const { usuario } = useContext(UserContext);
+  const [registros, setRegistros] = useState([]);
+  const [cargando, setCargando] = useState(true);
+  const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
 
-  const pacientesFiltrados = pacientes.filter((paciente) =>
-    `${paciente.nombre} ${paciente.apellidos}`
-      .toLowerCase()
-      .includes(busqueda.toLowerCase())
-  );
+  useEffect(() => {
+    const cargarRegistros = async () => {
+      try {
+        // 1️⃣ Prioriza ID de URL, si no usa el del contexto
+        const idPaciente = searchParams.get("id") || usuario?.id_paciente;
+        if (!idPaciente) {
+          console.warn("⚠️ No se encontró ID del paciente");
+          setCargando(false);
+          return;
+        }
+
+        const res = await fetch(`${API_URL}/paciente/${idPaciente}`);
+        const data = await res.json();
+
+        if (!Array.isArray(data)) {
+          console.error("⚠️ Respuesta inesperada del servidor:", data);
+          setRegistros([]);
+        } else {
+          setRegistros(data);
+        }
+      } catch (err) {
+        console.error("Error al cargar registros:", err);
+        setRegistros([]);
+      } finally {
+        setCargando(false);
+      }
+    };
+
+    cargarRegistros();
+  }, [searchParams, usuario]);
+
+  const volver = () => {
+    if (usuario?.rol === "paciente") navigate("/inicio-paciente");
+    else navigate("/inicio-medico");
+  };
+
+  if (cargando) return <p className="loading">Cargando historial médico...</p>;
 
   return (
-    <div className="historial-container">
-      
-      {!pacienteSeleccionado && (
-        <div className="listado-pacientes">
-          <h1 className="titulo">Pacientes</h1>
-          <div className="buscador">
-            <FiSearch className="icono-busqueda" />
-            <input
-              type="text"
-              placeholder="Buscar paciente..."
-              value={busqueda}
-              onChange={(e) => setBusqueda(e.target.value)}
-              className="buscador-input"
-            />
-          </div>
+    <div className="historial-medico">
+      <div className="header-historial">
+        <button onClick={volver} className="btn-volver">
+          <ArrowLeftCircle size={20} /> Volver
+        </button>
+        <h2>
+          <FileText size={22} /> Historial Médico
+        </h2>
+      </div>
 
-          {pacientesFiltrados.length > 0 ? (
-            pacientesFiltrados.map((paciente) => (
-              <div
-                key={paciente.id}
-                className="card-paciente"
-                onClick={() => setPacienteSeleccionado(paciente)}
-              >
-                <h3>{paciente.nombre} {paciente.apellidos}</h3>
-                <p><strong>Edad:</strong> {paciente.edad}</p>
-                <p><strong>Tel:</strong> {paciente.telefono}</p>
+      {registros.length === 0 ? (
+        <div className="no-registros">
+          <FileText className="no-icon" />
+          <h3>No hay registros médicos</h3>
+          <p>
+            {usuario?.rol === "paciente"
+              ? "Aún no tienes notas médicas registradas."
+              : "Este paciente aún no tiene notas registradas."}
+          </p>
+        </div>
+      ) : (
+        <div className="registros-list">
+          {registros.map((r) => (
+            <div key={r.id} className="registro-card">
+              <div className="registro-info">
+                <p className="medico">
+                  <User size={16} /> Dr. {r.medico_nombre} {r.medico_apellido}
+                </p>
+                <p className="nota">{r.notas}</p>
               </div>
-            ))
-          ) : (
-            <p className="mensaje-seleccion">No se encontraron pacientes.</p>
-          )}
+              <small className="id-registro">#Registro: {r.id}</small>
+            </div>
+          ))}
         </div>
       )}
-
-      
-      <div className="detalle-paciente">
-        {pacienteSeleccionado ? (
-          <>
-            <div className="volver" onClick={() => setPacienteSeleccionado(null)}>
-              <IoIosArrowRoundBack size={28} /> Volver a lista
-            </div>
-
-            <div className="detalle-historial-container">
-              <h2>{pacienteSeleccionado.nombre} {pacienteSeleccionado.apellidos}</h2>
-
-              <div className="info-section">
-                <h3>Datos Personales</h3>
-                <p><strong>Género:</strong> {pacienteSeleccionado.genero}</p>
-                <p><strong>Fecha de nacimiento:</strong> {pacienteSeleccionado.fechaNacimiento}</p>
-                <p><strong>Edad:</strong> {pacienteSeleccionado.edad}</p>
-                <p><strong>Dirección:</strong> {pacienteSeleccionado.direccion}</p>
-                <p><strong>Teléfono:</strong> {pacienteSeleccionado.telefono}</p>
-                <p><strong>Contacto de emergencia:</strong> {pacienteSeleccionado.contactoEmergencia}</p>
-                <p><strong>Ocupación:</strong> {pacienteSeleccionado.ocupacion}</p>
-              </div>
-
-              <div className="info-section">
-                <h3>Información Médica</h3>
-                <p><strong>Enfermedad:</strong> {pacienteSeleccionado.enfermedad}</p>
-                <p><strong>Medicamentos actuales:</strong></p>
-                <ul>
-                  {pacienteSeleccionado.medicamentosActuales.map((med, i) => (
-                    <li key={i}>{med}</li>
-                  ))}
-                </ul>
-                <p><strong>Antecedentes familiares:</strong> {pacienteSeleccionado.antecedentesFamiliares}</p>
-                <p><strong>Alergias:</strong> {pacienteSeleccionado.alergias}</p>
-                <p><strong>Evolución clínica:</strong> {pacienteSeleccionado.evolucionClinica}</p>
-              </div>
-
-              <div className="info-section">
-                <h3>Historial Médico</h3>
-                <ul>
-                  {pacienteSeleccionado.historial.length > 0 ? (
-                    pacienteSeleccionado.historial.map((registro, i) => (
-                      <li key={i}>
-                        <strong>{registro.fecha}:</strong> {registro.descripcion}
-                      </li>
-                    ))
-                  ) : (
-                    <li>No hay registros disponibles.</li>
-                  )}
-                </ul>
-              </div>
-            </div>
-          </>
-        ) : (
-          <p className="mensaje-seleccion">Seleccione un paciente para ver su historial.</p>
-        )}
-      </div>
     </div>
   );
 }
-
-
