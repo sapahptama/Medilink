@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/UserContext";
 import { ArrowLeftCircle, FileText, User } from "lucide-react";
-import "./HistorialMedico.css";
+import "./historialMedico.css";
 
 const API_URL = "https://servidor-medilink.vercel.app/registros";
 

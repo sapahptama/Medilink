@@ -83,7 +83,7 @@ function App() {
           <Route path="/registro-medico" element={<FormularioRegistroMedico />} />
           <Route path="/vistamedico" element={<VistaMedico />} />
           <Route path="/vistaprincipalmedico" element={<VistaPrincipalMedico />} />
-          <Route path="/historial-medico" element={<HistorialMedico />} />
+          <Route path="/historial-medico" element={<HistorialMedico/>} />
           {/* Fin Yidis */}
           {/* Camilo */}
           <Route path="/pagar" element={<Pagar />} />
