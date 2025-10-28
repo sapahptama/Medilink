@@ -11,7 +11,6 @@ import SelectedDoctor from "./pages/SeleccionMedico/SeleccionMedico.jsx";
 import FormularioRegistroMedico from "./pages/FormularioRegistroMedico/formularioRegistroMedico.jsx";
 import VistaMedico from "./pages/VistaDetalladaMedico/vistamedico.jsx";
 import VistaPrincipalMedico from "./pages/VistaPrincipalMedico/vistaprincipalmedico.jsx";
-import HistorialMedico from "./pages/HistorialMedico/historialMedico.jsx";
 import Pagar from "./pages/Pagar/Pagar.jsx";
 import Perfil from "./pages/Perfil/Perfil.jsx";
 import Agendar from "./pages/Agendar/Agendar.jsx";
@@ -24,6 +23,7 @@ import ConfigDates from "./pages/ConfigDates/ConfigDates.jsx";
 import DisponibilidadMedico from "./pages/DisponibilidadMedico/DisponibilidadMedico.jsx";
 import MisCitas from "./pages/MisCitas/MisCitas.jsx";
 import MisPacientes from "./pages/MisPacientes/MisPacientes.jsx";
+import HistorialMedico from "./pages/HistorialMedico/HistorialMedico.jsx";
 function App() {
   return (
     <>
