@@ -11,7 +11,7 @@ import SelectedDoctor from "./pages/SeleccionMedico/SeleccionMedico.jsx";
 import FormularioRegistroMedico from "./pages/FormularioRegistroMedico/formularioRegistroMedico.jsx";
 import VistaMedico from "./pages/VistaDetalladaMedico/vistamedico.jsx";
 import VistaPrincipalMedico from "./pages/VistaPrincipalMedico/vistaprincipalmedico.jsx";
-import HistorialMedico from "./pages/HistorialMedico/HistorialMedico.jsx";
+import HistorialMedico from "./pages/HistorialMedico/historialMedico.jsx";
 import Pagar from "./pages/Pagar/Pagar.jsx";
 import Perfil from "./pages/Perfil/Perfil.jsx";
 import Agendar from "./pages/Agendar/Agendar.jsx";
