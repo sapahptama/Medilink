@@ -13,7 +13,7 @@ import VistaMedico from "./pages/VistaDetalladaMedico/vistamedico.jsx";
 import VistaPrincipalMedico from "./pages/VistaPrincipalMedico/vistaprincipalmedico.jsx";
 import HistorialMedico from "./pages/HistorialMedico/HistorialMedico.jsx";
 import Pagar from "./pages/Pagar/Pagar.jsx";
-import PerfilPaciente from "./pages/Perfil/Perfil.jsx";
+import Perfil from "./pages/Perfil/Perfil.jsx";
 import Agendar from "./pages/Agendar/Agendar.jsx";
 import UserProfile from "./pages/PerfilMedico/PerfilMedico.jsx";
 import Ajustes from "./pages/Ajustes/Ajustes.jsx";
@@ -87,7 +87,7 @@ function App() {
           {/* Fin Yidis */}
           {/* Camilo */}
           <Route path="/pagar" element={<Pagar />} />
-          <Route path="/perfil" element={<PerfilPaciente />} />
+          <Route path="/perfil" element={<Perfil />} />
           <Route path="/agendar" element={<Agendar />} />
           {/* Fin Camilo */}
 

@@ -62,3 +62,68 @@
 .bottom-navigation .nav-item.active::before {
   background: linear-gradient(135deg, #0a4d68 0%, #05b0ff 100%);
 }
+
+/* ==================== ACCIONES RÁPIDAS RESPONSIVE ==================== */
+/* Dispositivos grandes (768px+): 3 columnas */
+.quick-actions {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+/* Tablets (641px - 767px): 2 columnas */
+@media (max-width: 767px) {
+  .quick-actions {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Móviles (640px o menos): 2 columnas pero sin el botón de citas */
+@media (max-width: 640px) {
+  .quick-actions {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+  }
+  
+  /* En móviles muy pequeños, una columna */
+  @media (max-width: 480px) {
+    .quick-actions {
+      grid-template-columns: 1fr;
+      max-width: 300px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+}
+
+/* Asegurar que las tarjetas de acción se expandan correctamente */
+.action-card {
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.action-icon {
+  width: 56px;
+  height: 56px;
+  margin-bottom: 0.75rem;
+}
+
+.action-icon .icon {
+  width: 28px;
+  height: 28px;
+}
+
+/* Barra de navegación solo visible en móviles */
+@media (min-width: 768px) {
+  .bottom-navigation {
+    display: none;
+  }
+  
+  .inicio-medico-container {
+    padding-bottom: 2rem;
+  }
+}

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import {
   Bell,
   Calendar,
@@ -6,35 +6,43 @@ import {
   Stethoscope,
   FileText,
   User,
-  MessageCircle,
-  Activity,
-  Clock,
-  Heart,
-  ChevronRight,
-  MapPin,
   Home,
   Phone,
   Mail,
+  ChevronRight,
+  Heart,
+  Clock,
+  Activity,
 } from "lucide-react";
 import "./InicioMedico.css";
 import { UserContext } from "../../context/UserContext";
-import { useNavigate } from "react-router-dom"; // ✅ Importar navegación
+import { useNavigate } from "react-router-dom";
 import ProximaCita from "../../components/ProximaCita/ProximaCita";
 
 function InicioMedico() {
   const [activeTab, setActiveTab] = useState("inicio");
+  const [isMobile, setIsMobile] = useState(false);
   const { usuario } = useContext(UserContext);
-  const navigate = useNavigate(); // ✅ Hook de navegación
+  const navigate = useNavigate();
+
+  // Detectar si es dispositivo móvil
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const navigateTo = {
     inicio: () => setActiveTab("inicio"),
     pacientes: () => navigate("/mis-pacientes"),
     citas: () => navigate("/mis-citas"),
-    historial: () => setActiveTab("historial"),
-    mensajes: () => setActiveTab("mensajes"),
-    notificaciones: () => setActiveTab("notificaciones"),
-    perfil: () => setActiveTab("perfil"),
-    horarios: () => navigate("/mis-horarios"), // ✅ Redirección a /mis-horarios
+    perfil: () => navigate("/perfil"),
+    horarios: () => navigate("/mis-horarios"),
   };
 
   return (
@@ -50,15 +58,6 @@ function InicioMedico() {
           </div>
 
           <div className="header-right">
-            <button
-              onClick={navigateTo.notificaciones}
-              className="header-icon-btn"
-              aria-label="Notificaciones"
-            >
-              <Bell className="header-icon" />
-              <span className="notification-badge"></span>
-            </button>
-
             <button
               onClick={navigateTo.perfil}
               className="header-profile-btn"
@@ -80,7 +79,7 @@ function InicioMedico() {
           </h2>
         </section>
 
-        {/* ACCIONES RÁPIDAS */}
+        {/* ACCIONES RÁPIDAS - RESPONSIVE */}
         <section className="quick-actions">
           <button onClick={navigateTo.pacientes} className="action-card">
             <div className="action-icon teal">
@@ -90,37 +89,23 @@ function InicioMedico() {
             <p className="action-subtitle">Ver historial y fichas</p>
           </button>
 
-          <button onClick={navigateTo.citas} className="action-card">
-            <div className="action-icon blue">
-              <Calendar className="icon" />
-            </div>
-            <h3 className="action-title">Mis Citas</h3>
-            <p className="action-subtitle">Hoy y próximas</p>
-          </button>
+          {/* Mostrar "Citas" solo en dispositivos grandes */}
+          {!isMobile && (
+            <button onClick={navigateTo.citas} className="action-card">
+              <div className="action-icon blue">
+                <Calendar className="icon" />
+              </div>
+              <h3 className="action-title">Mis Citas</h3>
+              <p className="action-subtitle">Hoy y próximas</p>
+            </button>
+          )}
 
-          {/* ✅ NUEVO BOTÓN: MIS HORARIOS */}
           <button onClick={navigateTo.horarios} className="action-card">
-            <div className="action-icon teal">
+            <div className="action-icon purple">
               <Clock className="icon" />
             </div>
             <h3 className="action-title">Mis Horarios</h3>
             <p className="action-subtitle">Gestiona tu disponibilidad</p>
-          </button>
-
-          <button onClick={navigateTo.historial} className="action-card">
-            <div className="action-icon purple">
-              <FileText className="icon" />
-            </div>
-            <h3 className="action-title">Historial Clínico</h3>
-            <p className="action-subtitle">Pacientes atendidos</p>
-          </button>
-
-          <button onClick={navigateTo.mensajes} className="action-card">
-            <div className="action-icon amber">
-              <MessageCircle className="icon" />
-            </div>
-            <h3 className="action-title">Mensajes</h3>
-            <p className="action-subtitle">Chats y consultas</p>
           </button>
         </section>
 
@@ -128,6 +113,7 @@ function InicioMedico() {
         <div className="content-grid">
           <div className="left-column">
             <ProximaCita />
+            
             {/* PACIENTES DESTACADOS */}
             <div className="favorites-card">
               <h3 className="card-title">
@@ -211,41 +197,34 @@ function InicioMedico() {
         </div>
       </main>
 
-      {/* NAVEGACIÓN INFERIOR */}
-      <nav className="bottom-navigation">
-        <button
-          onClick={navigateTo.inicio}
-          className={`nav-item ${activeTab === "inicio" ? "active" : ""}`}
-        >
-          <Home className="nav-icon" />
-          <span className="nav-label">Inicio</span>
-        </button>
+      {/* NAVEGACIÓN INFERIOR - SOLO EN MÓVIL */}
+      {isMobile && (
+        <nav className="bottom-navigation">
+          <button
+            onClick={navigateTo.inicio}
+            className={`nav-item ${activeTab === "inicio" ? "active" : ""}`}
+          >
+            <Home className="nav-icon" />
+            <span className="nav-label">Inicio</span>
+          </button>
 
-        <button
-          onClick={navigateTo.citas}
-          className={`nav-item ${activeTab === "citas" ? "active" : ""}`}
-        >
-          <Calendar className="nav-icon" />
-          <span className="nav-label">Citas</span>
-        </button>
+          <button
+            onClick={navigateTo.citas}
+            className={`nav-item ${activeTab === "citas" ? "active" : ""}`}
+          >
+            <Calendar className="nav-icon" />
+            <span className="nav-label">Citas</span>
+          </button>
 
-        <button
-          onClick={navigateTo.mensajes}
-          className={`nav-item ${activeTab === "mensajes" ? "active" : ""}`}
-        >
-          <MessageCircle className="nav-icon" />
-          <span className="nav-label">Mensajes</span>
-          <span className="nav-badge">2</span>
-        </button>
-
-        <button
-          onClick={navigateTo.perfil}
-          className={`nav-item ${activeTab === "perfil" ? "active" : ""}`}
-        >
-          <User className="nav-icon" />
-          <span className="nav-label">Perfil</span>
-        </button>
-      </nav>
+          <button
+            onClick={navigateTo.perfil}
+            className={`nav-item ${activeTab === "perfil" ? "active" : ""}`}
+          >
+            <User className="nav-icon" />
+            <span className="nav-label">Perfil</span>
+          </button>
+        </nav>
+      )}
     </div>
   );
 }

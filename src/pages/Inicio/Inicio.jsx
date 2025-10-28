@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Search,
-  Bell,
   Calendar,
   User,
   Activity,
@@ -15,11 +14,9 @@ import {
   Pill,
   Stethoscope,
   ClipboardList,
-  MessageCircle,
   Home,
 } from "lucide-react";
 import "./Inicio.css";
-//importar navigate
 import { useNavigate } from "react-router-dom";
 import ProximaCita from "../../components/ProximaCita/ProximaCita";
 import { useContext } from "react";
@@ -29,29 +26,29 @@ function Inicio() {
   const { usuario } = useContext(UserContext);
   const [searchTerm, setSearchTerm] = useState("");
   const [activeTab, setActiveTab] = useState("inicio");
+  const [isMobile, setIsMobile] = useState(false);
   const navigate = useNavigate();
 
-  // 🔗 FUNCIONES DE NAVEGACIÓN - Agrega aquí tus redirecciones
+  // Detectar si es dispositivo móvil
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // 🔗 FUNCIONES DE NAVEGACIÓN
   const navigateTo = {
     buscar: () => {
       console.log("Navegar a búsqueda avanzada");
-      // Ejemplo: window.location.href = '/buscar';
-      // O con React Router: navigate('/buscar');
-    },
-    notificaciones: () => {
-      console.log("Navegar a notificaciones");
-      setActiveTab("notificaciones");
-      // navigate('/notificaciones');
     },
     perfil: () => {
       console.log("Navegar a perfil completo");
-      setActiveTab("perfil");
-      // navigate('/perfil');
-    },
-    mensajes: () => {
-      console.log("Navegar a mensajes");
-      setActiveTab("mensajes");
-      // navigate('/mensajes');
+      navigate("/perfil");
     },
     agendarCita: () => {
       navigate("/seleccionar-medico");
@@ -67,26 +64,21 @@ function Inicio() {
       }
       navigate(`/historial-medico?id=${usuario.id_paciente}`);
     },
-    recetas: () => {
-      console.log("Navegar a recetas");
-      // navigate('/recetas');
-    },
     resultados: () => {
       console.log("Navegar a resultados de laboratorio");
-      // navigate('/resultados-lab');
     },
     clinica: (clinicaId) => {
       console.log(`Navegar a clínica: ${clinicaId}`);
-      // navigate(`/clinica/${clinicaId}`);
     },
     doctor: (doctorId) => {
       console.log(`Navegar a doctor: ${doctorId}`);
-      // navigate(`/doctor/${doctorId}`);
     },
     verDetalleCita: (citaId) => {
       console.log(`Ver detalle de cita: ${citaId}`);
-      // navigate(`/cita/${citaId}`);
     },
+    inicio: () => {
+      setActiveTab("inicio");
+    }
   };
 
   return (
@@ -102,15 +94,6 @@ function Inicio() {
           </div>
 
           <div className="header-right">
-            <button
-              onClick={navigateTo.notificaciones}
-              className="header-icon-btn"
-              aria-label="Notificaciones"
-            >
-              <Bell className="header-icon" />
-              <span className="notification-badge"></span>
-            </button>
-
             <button
               onClick={navigateTo.perfil}
               className="header-profile-btn"
@@ -144,7 +127,8 @@ function Inicio() {
             </button>
           </div>
         </div>
-        {/* ACCIONES RÁPIDAS */}
+
+        {/* ACCIONES RÁPIDAS - RESPONSIVE */}
         <div className="quick-actions">
           <button onClick={navigateTo.agendarCita} className="action-card">
             <div className="action-icon teal">
@@ -154,13 +138,16 @@ function Inicio() {
             <p className="action-subtitle">Nueva consulta</p>
           </button>
 
-          <button onClick={navigateTo.misCitas} className="action-card">
-            <div className="action-icon blue">
-              <ClipboardList className="icon" />
-            </div>
-            <h3 className="action-title">Mis Citas</h3>
-            <p className="action-subtitle">Ver programadas</p>
-          </button>
+          {/* Mostrar "Mis Citas" solo en dispositivos grandes */}
+          {!isMobile && (
+            <button onClick={navigateTo.misCitas} className="action-card">
+              <div className="action-icon blue">
+                <ClipboardList className="icon" />
+              </div>
+              <h3 className="action-title">Mis Citas</h3>
+              <p className="action-subtitle">Ver programadas</p>
+            </button>
+          )}
 
           <button onClick={navigateTo.historialMedico} className="action-card">
             <div className="action-icon purple">
@@ -169,14 +156,6 @@ function Inicio() {
             <h3 className="action-title">Historial</h3>
             <p className="action-subtitle">Médico</p>
           </button>
-
-          <button onClick={navigateTo.recetas} className="action-card">
-            <div className="action-icon amber">
-              <Pill className="icon" />
-            </div>
-            <h3 className="action-title">Recetas</h3>
-            <p className="action-subtitle">Medicamentos</p>
-          </button>
         </div>
 
         <div className="content-grid">
@@ -184,6 +163,7 @@ function Inicio() {
           <div className="left-column">
             {/* PRÓXIMA CITA */}
             <ProximaCita />
+            
             {/* CLÍNICAS Y DOCTORES FAVORITOS */}
             <div className="favorites-card">
               <h3 className="card-title">
@@ -316,44 +296,34 @@ function Inicio() {
         </div>
       </div>
 
-      {/* BARRA DE NAVEGACIÓN INFERIOR */}
-      <nav className="bottom-navigation">
-        <button
-          onClick={navigateTo.inicio}
-          className={`nav-item ${activeTab === "inicio" ? "active" : ""}`}
-        >
-          <Home className="nav-icon" />
-          <span className="nav-label">Inicio</span>
-        </button>
+      {/* BARRA DE NAVEGACIÓN INFERIOR - SOLO EN MÓVIL */}
+      {isMobile && (
+        <nav className="bottom-navigation">
+          <button
+            onClick={navigateTo.inicio}
+            className={`nav-item ${activeTab === "inicio" ? "active" : ""}`}
+          >
+            <Home className="nav-icon" />
+            <span className="nav-label">Inicio</span>
+          </button>
 
-        <button
-          onClick={navigateTo.mensajes}
-          className={`nav-item ${activeTab === "mensajes" ? "active" : ""}`}
-        >
-          <MessageCircle className="nav-icon" />
-          <span className="nav-label">Mensajes</span>
-          <span className="nav-badge">3</span>
-        </button>
+          <button
+            onClick={navigateTo.misCitas}
+            className={`nav-item ${activeTab === "citas" ? "active" : ""}`}
+          >
+            <ClipboardList className="nav-icon" />
+            <span className="nav-label">Mis Citas</span>
+          </button>
 
-        <button
-          onClick={navigateTo.notificaciones}
-          className={`nav-item ${
-            activeTab === "notificaciones" ? "active" : ""
-          }`}
-        >
-          <Bell className="nav-icon" />
-          <span className="nav-label">Notificaciones</span>
-          <span className="nav-badge">5</span>
-        </button>
-
-        <button
-          onClick={navigateTo.perfil}
-          className={`nav-item ${activeTab === "perfil" ? "active" : ""}`}
-        >
-          <User className="nav-icon" />
-          <span className="nav-label">Perfil</span>
-        </button>
-      </nav>
+          <button
+            onClick={navigateTo.perfil}
+            className={`nav-item ${activeTab === "perfil" ? "active" : ""}`}
+          >
+            <User className="nav-icon" />
+            <span className="nav-label">Perfil</span>
+          </button>
+        </nav>
+      )}
     </div>
   );
 }
