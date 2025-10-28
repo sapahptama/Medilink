@@ -23,7 +23,7 @@ import ConfigDates from "./pages/ConfigDates/ConfigDates.jsx";
 import DisponibilidadMedico from "./pages/DisponibilidadMedico/DisponibilidadMedico.jsx";
 import MisCitas from "./pages/MisCitas/MisCitas.jsx";
 import MisPacientes from "./pages/MisPacientes/MisPacientes.jsx";
-import HistorialMedico from "./pages/HistorialMedico/HistorialMedico.jsx";
+import HistorialMedico from "./pages/HistorialMedico/historialmedico.jsx";
 function App() {
   return (
     <>
